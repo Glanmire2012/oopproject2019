@@ -1,9 +1,6 @@
 package Appointments;
 
-import java.time.LocalDate;
-
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 
 public class AppointmentDisplay extends FlowPane{

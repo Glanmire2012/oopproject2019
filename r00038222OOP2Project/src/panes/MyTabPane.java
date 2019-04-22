@@ -7,6 +7,6 @@ public class MyTabPane extends TabPane{
 	public MyTabPane(){
 
 		this.setSide(Side.TOP);
-		
+		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	}
 }

@@ -2,15 +2,11 @@ package controller;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import Appointments.AppointmentList;
 import javafx.stage.Stage;
 import list.DentistList;
-import list.ObjectList;
 import list.PatientList;
 import list.ProcedureList;
-import person.Patient;
 import storage.FileStorage;
 
 public class Controller implements Serializable {
