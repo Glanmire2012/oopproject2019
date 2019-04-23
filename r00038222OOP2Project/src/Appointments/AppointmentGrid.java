@@ -28,6 +28,8 @@ public class AppointmentGrid extends MyGridPane {
 
 	@SuppressWarnings("static-access")
 	public void grid() {
+		makeAppointment();
+		innerB();
 		this.setConstraints(innerA, 0, 0);
 		this.setConstraints(innerB, 1, 0);
 		this.prefWidthProperty().bind(this.widthProperty());
@@ -48,9 +50,9 @@ public class AppointmentGrid extends MyGridPane {
 		} catch (NullPointerException n) {
 			System.out.println("Null pointer Exception");
 		}
-
+		innerB.prefWidthProperty().bind(this.heightProperty());
 		innerB.setContent(listResults);
-		grid();
+	    innerB.autosize();
 	}
 
 	
@@ -92,6 +94,8 @@ public class AppointmentGrid extends MyGridPane {
 
 	}
 
+
+
 	public void checkAppointments(DatePicker dateInput) {
 		// checks for times available on a particular date.
 		LocalDate dateToCheck = dateInput.getValue();// date that needs to be checked.
@@ -102,7 +106,7 @@ public class AppointmentGrid extends MyGridPane {
 			createNewDay(dateToCheck);
 			ind = true;// sets ind to true, date now exists.
 			day = (AppointmentDay) appointments.get(0); // sets day to this newly created day, which will be at index 0
-														// because it is the first entry.
+			System.out.println("No days exist");										// because it is the first entry.
 		} else {
 			for (int i = 0; i < ListSize; i++) { // loops through the list to find the relevant day.
 				AppointmentDay d = (AppointmentDay) appointments.get(i);
@@ -117,8 +121,8 @@ public class AppointmentGrid extends MyGridPane {
 			}
 		}
 		if (ind == false) {// if the day does not exist it is then created.
+			System.out.println("Date does not exist yet");
 			createNewDay(dateToCheck);
-
 		} else if (ind == true) { // once the day exists a list of available times is then generated, to be
 									// displayed.
 			AppointmentDisplay appointmentFrames = new AppointmentDisplay(day, a);
@@ -126,6 +130,7 @@ public class AppointmentGrid extends MyGridPane {
 			System.out.println(daySize);
 			appointmentFrames.buildAppointmentSimpleFrame();
 		}
+		
 	}
 
 	public void createNewDay(LocalDate dateToCheck) { // creates the required day by populating the list with
@@ -140,6 +145,8 @@ public class AppointmentGrid extends MyGridPane {
 			newDay.addSlot(time30);
 			hour = hour + 100;
 		}
+		System.out.println("Day created");
+		this.day = newDay;
 		instance.appointmentList.addAppointment(newDay);// Adds the freshly created day to the appointment list
 		instance.updateList();
 	}
@@ -187,11 +194,12 @@ public class AppointmentGrid extends MyGridPane {
 		super();
 		this.instance = Controller.getInstance();
 		this.appointments = instance.getAppointmentList();
+		
 		setPatient(patient);
 		setI(i);
 		setfName(patient);
 		setsName(patient);
 		setID(patient);
-		
+		grid();
 	}
 }

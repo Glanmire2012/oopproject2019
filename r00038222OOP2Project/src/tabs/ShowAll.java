@@ -1,10 +1,6 @@
 package tabs;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import controller.Controller;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,7 +10,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import list.ObjectList;
 import list.PatientList;
 import panes.MyGridPane;
@@ -50,6 +45,7 @@ public class ShowAll extends MyGridPane{
 		display();
 	}
 	
+	@SuppressWarnings("static-access")
 	public void display() {
 		
 		Label Heading = new Label("List of all current Patients");GridPane.setConstraints(Heading, 0, 0, 5, 1);

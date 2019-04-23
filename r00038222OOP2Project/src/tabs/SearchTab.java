@@ -41,7 +41,7 @@ public class SearchTab extends MyGridPane {
 
 	public void searching() {
 		Text head = new Text();
-		head.setText("Please Enter at least 1 Feild Below to search Patient files.");
+		head.setText("Please Enter at least 1 Field Below to search Patient files.");
 		GridPane.setConstraints(head, 0, 0, 3, 1);
 
 		Label fNameLabel = new Label("First Name:");

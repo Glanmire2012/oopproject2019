@@ -1,10 +1,5 @@
 package Appointments;
 
-import controller.Controller;
-import javafx.scene.text.Text;
-import list.PatientList;
-import panes.MyGridPane;
-import panes.RecordGrid;
 import person.Patient;
 import stages.Newstage;
 
