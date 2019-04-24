@@ -34,7 +34,7 @@ public class AppointmentGrid extends MyGridPane {
 		makeAppointment();
 		innerB();
 		this.setConstraints(innerA, 0, 0);
-		this.setConstraints(innerB, 1, 0);
+		this.setConstraints(innerB, 0, 1);
 		//this.prefWidthProperty().bind(this.widthProperty());
 		this.getChildren().addAll(innerA, innerB);
 	}
