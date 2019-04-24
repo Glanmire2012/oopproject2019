@@ -9,13 +9,20 @@ public class Slot implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	public LocalDate day;
+	public int year;
+	public int doy;
 	private int time;
 	private int id;
+	private long appointmentID;
 	
 	public Slot(LocalDate day,int time, int id) {//each slot is a half hour time slot into which appointments are booked.
 		this.day = day;
 		this.time = time;
+		this.year = day.getYear();
+		this.doy = day.getDayOfYear();
 		this.setId(id);
+		this.setAppointmentID();
+		
 	}
 	public LocalDate getDay() {
 		return day;
@@ -41,5 +48,12 @@ public class Slot implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public long getAppointmentID() {
+		return appointmentID;
+	}
+	public void setAppointmentID() {
+		String genID = ""+(year-2000)+doy+time+"";
+		this.appointmentID = Integer.parseInt(genID);
 	}
 }

@@ -1,37 +1,34 @@
 package Appointments;
 
-import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
+import list.ObjectList;
+import panes.MyGridPane;
 
-public class AppointmentDisplay extends FlowPane{
-	AppointmentDay day;
+public class AppointmentDisplay extends MyGridPane {
+	
 	Slot slot;
+	ObjectList store;
 	int i;
 	int time;
-	public AppointmentDisplay(AppointmentDay day, int i) {
-		this.day = day;
+
+	public AppointmentDisplay(Slot slot, int i) {
+		
 		this.i = i;
-		this.slot = (Slot) day.get(i);
+		this.slot = slot;
 		this.time = slot.getTime();
+		buildAppointmentSimpleFrame();
 	}
-	
+
+	@SuppressWarnings("static-access")
 	public void buildAppointmentSimpleFrame() {
-		Text timeLabel = new Text("AVAILABLE");
-		Text timeText = new Text(""+time+"");
-			
-		this.getChildren().addAll(timeLabel,timeText);
+		Text timeLabel = new Text("AVAILABLE");this.setConstraints(timeLabel,0,0);
+		Text timeText = new Text("" + time + "");this.setConstraints(timeLabel,0,1);
+		this.prefWidthProperty().bind(this.widthProperty());
+		this.getChildren().addAll(timeLabel, timeText);
+		}
+		
+
 	}
+
 	
-	public void buildAppointmentFullFrame() {
-		Text pidLabel = new Text("Patient ID :");
-		Text pidText = new Text(""+slot.getId());
-		
-		Text dateLabel = new Text("Date :");
-		Text dateText = new Text(""+slot.getDay());
-		
-		Text timeLabel = new Text("Time :");
-		Text timeText = new Text(""+time+"");
-		
-		this.getChildren().addAll(pidLabel,pidText,dateLabel,dateText,timeLabel,timeText);
-	}
-}
+

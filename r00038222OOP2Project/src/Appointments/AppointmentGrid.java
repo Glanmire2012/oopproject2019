@@ -3,10 +3,12 @@ package Appointments;
 import java.time.LocalDate;
 
 import controller.Controller;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
+import list.ObjectList;
 import panes.MyGridPane;
 import person.Patient;
 
@@ -20,11 +22,12 @@ public class AppointmentGrid extends MyGridPane {
 	AppointmentList appointments;
 	AppointmentDay day;
 	ScrollPane innerB;
+	ObjectList store;
+	MyGridPane slotPane = new MyGridPane();
+	Slot slot;
 	boolean ind = false;
 	int i;
 	int a;
-
-	
 
 	@SuppressWarnings("static-access")
 	public void grid() {
@@ -32,7 +35,7 @@ public class AppointmentGrid extends MyGridPane {
 		innerB();
 		this.setConstraints(innerA, 0, 0);
 		this.setConstraints(innerB, 1, 0);
-		this.prefWidthProperty().bind(this.widthProperty());
+		//this.prefWidthProperty().bind(this.widthProperty());
 		this.getChildren().addAll(innerA, innerB);
 	}
 
@@ -44,7 +47,7 @@ public class AppointmentGrid extends MyGridPane {
 		try {
 			int sizeOfDay = day.getSize();
 			for (int i = 0; i < sizeOfDay;) {
-				AppointmentDisplay frame = new AppointmentDisplay(day, i);
+				AppointmentDisplay frame = new AppointmentDisplay(slot, i);
 				listResults.getChildren().add(frame);
 			}
 		} catch (NullPointerException n) {
@@ -52,12 +55,8 @@ public class AppointmentGrid extends MyGridPane {
 		}
 		innerB.prefWidthProperty().bind(this.heightProperty());
 		innerB.setContent(listResults);
-	    innerB.autosize();
+		innerB.autosize();
 	}
-
-	
-
-	
 
 	@SuppressWarnings("static-access")
 	public void makeAppointment() {
@@ -94,8 +93,7 @@ public class AppointmentGrid extends MyGridPane {
 
 	}
 
-
-
+	@SuppressWarnings("static-access")
 	public void checkAppointments(DatePicker dateInput) {
 		// checks for times available on a particular date.
 		LocalDate dateToCheck = dateInput.getValue();// date that needs to be checked.
@@ -106,7 +104,7 @@ public class AppointmentGrid extends MyGridPane {
 			createNewDay(dateToCheck);
 			ind = true;// sets ind to true, date now exists.
 			day = (AppointmentDay) appointments.get(0); // sets day to this newly created day, which will be at index 0
-			System.out.println("No days exist");										// because it is the first entry.
+			System.out.println("No days exist"); // because it is the first entry.
 		} else {
 			for (int i = 0; i < ListSize; i++) { // loops through the list to find the relevant day.
 				AppointmentDay d = (AppointmentDay) appointments.get(i);
@@ -123,14 +121,27 @@ public class AppointmentGrid extends MyGridPane {
 		if (ind == false) {// if the day does not exist it is then created.
 			System.out.println("Date does not exist yet");
 			createNewDay(dateToCheck);
-		} else if (ind == true) { // once the day exists a list of available times is then generated, to be
-									// displayed.
-			AppointmentDisplay appointmentFrames = new AppointmentDisplay(day, a);
-			int daySize = day.getSize();
-			System.out.println(daySize);
-			appointmentFrames.buildAppointmentSimpleFrame();
 		}
-		
+
+		ObjectList frames = new ObjectList();
+		int rsize = day.getSize();
+		for (int i = 0; i < rsize; i++) {
+			slot = (Slot) day.get(i);
+			AppointmentDisplay searchPane = new AppointmentDisplay(slot, i);
+			frames.add(searchPane);
+		}
+		// Add the result frames to the result pane which is a gridpane.
+		int size = frames.getSize();
+		System.out.println("reslults frame size " + size);
+		for (int i = 0; i < size; i++) {
+			// Node rob = (Node) resultFrames.get(i);
+			slotPane.setConstraints((Node) frames.get(i), 0, i);
+			System.out.println((Node) frames.get(i));
+			slotPane.getChildren().add((Node) frames.get(i));
+		}
+		slotPane.prefWidthProperty().bind(this.widthProperty());
+		innerB.setContent(slotPane);
+
 	}
 
 	public void createNewDay(LocalDate dateToCheck) { // creates the required day by populating the list with
@@ -190,11 +201,12 @@ public class AppointmentGrid extends MyGridPane {
 	public void setI(int i) {
 		this.i = i;
 	}
+
 	public AppointmentGrid(Patient patient, int i) {
 		super();
 		this.instance = Controller.getInstance();
 		this.appointments = instance.getAppointmentList();
-		
+
 		setPatient(patient);
 		setI(i);
 		setfName(patient);
