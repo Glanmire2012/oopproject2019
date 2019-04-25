@@ -2,7 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.Serializable;
-import Appointments.AppointmentList;
+import Appointments.OverallAppointmentList;
 import javafx.stage.Stage;
 import list.DentistList;
 import list.PatientList;
@@ -21,7 +21,7 @@ public class Controller implements Serializable {
 	public PatientList patientList = new PatientList();
 	public DentistList dentistList = new DentistList();
 	public ProcedureList procedureList = new ProcedureList();
-	public AppointmentList appointmentList = new AppointmentList();
+	public OverallAppointmentList appointmentList = new OverallAppointmentList();
 	
 	private FileStorage loadSave = new FileStorage();
 	private File storage = new File("Storage.ser");
@@ -118,10 +118,10 @@ public class Controller implements Serializable {
 	public void setProcedureList(ProcedureList procedureList) {
 		this.procedureList = procedureList;
 	}
-	public AppointmentList getAppointmentList() {
+	public OverallAppointmentList getAppointmentList() {
 		return appointmentList;
 	}
-	public void setAppointmentList(AppointmentList appointmentList) {
+	public void setAppointmentList(OverallAppointmentList appointmentList) {
 		this.appointmentList = appointmentList;
 	}
 }

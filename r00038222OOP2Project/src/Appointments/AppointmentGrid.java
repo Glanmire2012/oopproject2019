@@ -3,10 +3,14 @@ package Appointments;
 import java.time.LocalDate;
 
 import controller.Controller;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import list.ObjectList;
 import panes.MyGridPane;
@@ -19,11 +23,11 @@ public class AppointmentGrid extends MyGridPane {
 	MyGridPane innerA;
 	Patient patient;
 	Controller instance;
-	AppointmentList appointments;
+	OverallAppointmentList appointments;
 	AppointmentDay day;
-	ScrollPane innerB;
+	MyGridPane innerB;
 	ObjectList store;
-	MyGridPane slotPane = new MyGridPane();
+	FlowPane slotPane = new FlowPane();
 	Slot slot;
 	boolean ind = false;
 	int i;
@@ -35,27 +39,17 @@ public class AppointmentGrid extends MyGridPane {
 		innerB();
 		this.setConstraints(innerA, 0, 0);
 		this.setConstraints(innerB, 0, 1);
-		//this.prefWidthProperty().bind(this.widthProperty());
+		final ColumnConstraints col1 = new ColumnConstraints(25, Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+		final ColumnConstraints col2 = new ColumnConstraints(25, Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+		// final ColumnConstraints col3 = new ColumnConstraints(25,
+		// Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+		// final ColumnConstraints col4 = new ColumnConstraints(25,
+		// Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+
+		// this.prefWidthProperty().bind(this.widthProperty());
+		col2.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().addAll(col1, col2);
 		this.getChildren().addAll(innerA, innerB);
-	}
-
-	public void innerB() {
-
-		innerB = new ScrollPane();
-		MyGridPane listResults = new MyGridPane();
-		listResults.getChildren().clear();
-		try {
-			int sizeOfDay = day.getSize();
-			for (int i = 0; i < sizeOfDay;) {
-				AppointmentDisplay frame = new AppointmentDisplay(slot, i);
-				listResults.getChildren().add(frame);
-			}
-		} catch (NullPointerException n) {
-			System.out.println("Null pointer Exception");
-		}
-		innerB.prefWidthProperty().bind(this.heightProperty());
-		innerB.setContent(listResults);
-		innerB.autosize();
 	}
 
 	@SuppressWarnings("static-access")
@@ -123,25 +117,41 @@ public class AppointmentGrid extends MyGridPane {
 			createNewDay(dateToCheck);
 		}
 
+		populate();
+	}
+
+	public void populate() {
 		ObjectList frames = new ObjectList();
-		int rsize = day.getSize();
-		for (int i = 0; i < rsize; i++) {
-			slot = (Slot) day.get(i);
-			AppointmentDisplay searchPane = new AppointmentDisplay(slot, i);
-			frames.add(searchPane);
+		slotPane.getChildren().clear();
+		innerB.getChildren().clear();
+		try {
+			int rsize = day.getSize();
+			for (int i = 0; i < rsize; i++) {
+				slot = (Slot) day.get(i);
+				AppointmentDisplay searchPane = new AppointmentDisplay(slot,patient, i);
+				frames.add(searchPane);
+			}
+		} catch (NullPointerException n) {
+			System.out.println("Null pointer");
 		}
 		// Add the result frames to the result pane which is a gridpane.
 		int size = frames.getSize();
 		System.out.println("reslults frame size " + size);
+		
 		for (int i = 0; i < size; i++) {
-			// Node rob = (Node) resultFrames.get(i);
-			slotPane.setConstraints((Node) frames.get(i), 0, i);
-			System.out.println((Node) frames.get(i));
 			slotPane.getChildren().add((Node) frames.get(i));
 		}
 		slotPane.prefWidthProperty().bind(this.widthProperty());
-		innerB.setContent(slotPane);
 
+		innerB.getChildren().addAll(slotPane);
+
+	}
+
+	public void innerB() {
+
+		innerB = new MyGridPane();
+		innerB.setAlignment(Pos.CENTER);
+		populate();
 	}
 
 	public void createNewDay(LocalDate dateToCheck) { // creates the required day by populating the list with
@@ -213,5 +223,6 @@ public class AppointmentGrid extends MyGridPane {
 		setsName(patient);
 		setID(patient);
 		grid();
+
 	}
 }

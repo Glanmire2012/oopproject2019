@@ -2,7 +2,7 @@ package Appointments;
 
 import list.ObjectList;
 
-public class AppointmentList extends ObjectList{
+public class OverallAppointmentList extends ObjectList{
 	/**
 	 * 
 	 */
@@ -10,12 +10,12 @@ public class AppointmentList extends ObjectList{
 	public AppointmentDay day;
 	public int a;
 	
-	public AppointmentList addAppointment(AppointmentDay day) {
+	public OverallAppointmentList addAppointment(AppointmentDay day) {
 		this.day = day;
 		this.add(day);	
 		return null;
 	}	
-	public AppointmentList removeAppointment(int a) {
+	public OverallAppointmentList removeAppointment(int a) {
 		this.a = a;
 		this.remove(a);
 		return null;

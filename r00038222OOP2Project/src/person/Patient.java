@@ -2,6 +2,7 @@ package person;
 
 import java.time.LocalDate;
 
+import list.AppointmentList;
 import list.ObjectList;
 
 public class Patient extends Person{
@@ -18,25 +19,12 @@ public class Patient extends Person{
 	String County;
 	LocalDate dob;
 	String phone;
-	ObjectList notes;
-	ObjectList AppointmentList;
+	AppointmentList appointments;
 	public Patient() {
-		AppointmentList = new ObjectList();
-		notes = new ObjectList();
+		this.appointments = new AppointmentList();
 		
 	}
-	public ObjectList getNotes() {
-		return notes;
-	}
-	public void setNotes(ObjectList notes) {
-		this.notes = notes;
-	}
-	public ObjectList getAppointmentList() {
-		return AppointmentList;
-	}
-	public void setAppointmentList(ObjectList appointmentList) {
-		AppointmentList = appointmentList;
-	}
+	
 	public String getCity() {
 		return City;
 	}

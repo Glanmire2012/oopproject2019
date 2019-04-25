@@ -13,7 +13,7 @@ public class NewAppointments extends Newstage{
 			getWindow().setScene(getScene());
 	       
 	        AppointmentGrid appointmentGrid = new AppointmentGrid(patient , i);
-	        
+	       
 	        getLayout().setContent(appointmentGrid);
 		}
 		
