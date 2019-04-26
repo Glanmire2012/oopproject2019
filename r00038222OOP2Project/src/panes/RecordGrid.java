@@ -10,21 +10,15 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import list.Appointment;
+import list.AppointmentList;
 import list.PatientList;
 import person.EnterPatient;
 import person.Patient;
 
 public class RecordGrid extends MyGridPane {
-	String fName;
-	String sName;
-	String Add1;
-	String Add2;
-	String Add3;
-	String city;
-	String county;
-	String phone;
 	LocalDate dob;
-	String id;
+
 	
 	TextField fNameField;
 	TextField sNameField; 
@@ -41,23 +35,18 @@ public class RecordGrid extends MyGridPane {
 	int i;
 	Patient patient;
 	Controller instance;
+	MyGridPane appointmentFrame;
 	MyGridPane innerTL;
 	MyGridPane innerTR;
 	MyGridPane outer ;
 	PatientList patientList;
+	AppointmentList appointments;
+	Appointment appointment;
 	EnterPatient data;
 	NewAppointments makeNewAppointment;
+	
 	public RecordGrid(Patient patient, int i) {
-		this.fName = patient.getFname();
-		this.sName = patient.getSname();
-		this.Add1 = patient.getAddLine1();
-		this.Add2 = patient.getAddLine2();
-		this.Add3 = patient.getAddLine3();
-		this.county = patient.getCounty();
-		this.city = patient.getCity();
-		this.phone = patient.getPhone();
 		this.dob = patient.getDob();
-		this.id = (""+ patient.getPatientID()+"");
 		this.i = i;
 		this.patient = patient;
 		this.data = new EnterPatient();
@@ -74,27 +63,27 @@ public class RecordGrid extends MyGridPane {
 		innerTL = new MyGridPane();
 				
 		Text IDLabel = new Text("PID :");innerTL.setConstraints(IDLabel, 0,0);
-		Text IDText = new Text(id);innerTL.setConstraints(IDText,1,0);
+		Text IDText = new Text(""+ patient.getPatientID()+"");innerTL.setConstraints(IDText,1,0);
 		
 		Text fNameLabel = new Text("First Name: ");innerTL.setConstraints(fNameLabel, 0, 1);
-		fNameField = new TextField(fName);innerTL.setConstraints(fNameField, 1, 1);
+		fNameField = new TextField(patient.getFname());innerTL.setConstraints(fNameField, 1, 1);
 		
 		Text sNameLabel = new Text("Last Name: ");innerTL.setConstraints(sNameLabel, 0, 2);
-		sNameField = new TextField(sName);innerTL.setConstraints(sNameField, 1, 2);
+		sNameField = new TextField(patient.getSname());innerTL.setConstraints(sNameField, 1, 2);
 		
 		Text Add1Label = new Text("Address: ");innerTL.setConstraints(Add1Label, 0,3);
-		Add1Field = new TextField(Add1);innerTL.setConstraints(Add1Field, 1, 3);
+		Add1Field = new TextField(patient.getAddLine1());innerTL.setConstraints(Add1Field, 1, 3);
 		
-		Add2Field = new TextField(Add2);innerTL.setConstraints(Add2Field, 1, 4);
+		Add2Field = new TextField(patient.getAddLine2());innerTL.setConstraints(Add2Field, 1, 4);
 		
-		Add3Field = new TextField(Add3);innerTL.setConstraints(Add3Field, 1, 5);
+		Add3Field = new TextField(patient.getAddLine3());innerTL.setConstraints(Add3Field, 1, 5);
 		
-		cityField = new TextField(city);innerTL.setConstraints(cityField, 1, 6);
+		cityField = new TextField(patient.getCity());innerTL.setConstraints(cityField, 1, 6);
 		
-		countyField = new TextField(county);innerTL.setConstraints(countyField, 1, 7);
+		countyField = new TextField(patient.getCounty());innerTL.setConstraints(countyField, 1, 7);
 		
 		Text phoneLabel = new Text("Phone: ");innerTL.setConstraints(phoneLabel, 0, 8);
-		phoneField = new TextField(phone);innerTL.setConstraints(phoneField, 1, 8);
+		phoneField = new TextField(patient.getPhone());innerTL.setConstraints(phoneField, 1, 8);
 		
 		DatePicker DateOfBirth = new DatePicker(dob);
 		
@@ -112,7 +101,24 @@ public class RecordGrid extends MyGridPane {
 	public void recordTopRight() {
 		innerTR = new MyGridPane();
 		Text heading = new Text("Appointments & Records");innerTR.setConstraints(heading,0,0);
-		innerTR.getChildren().addAll(heading);
+		innerTR.getChildren().add(heading);
+		this.appointments = patient.getAppointments();
+		try {
+			int size = appointments.getSize();
+			for (int i = 0; i < size; i++) {
+				appointment = (Appointment) appointments.get(i);
+				RecordAppointmentDisplay frame = new RecordAppointmentDisplay(appointment);
+				frame.displayFrame();
+				innerTR.setConstraints(frame,0,i+1);
+				innerTR.getChildren().add(frame);
+			}
+		}
+		catch (NullPointerException e) {
+			Text notice = new Text("No Appointments Found.");innerTR.setConstraints(notice,0,1);
+			innerTR.getChildren().add(notice);
+		}
+		
+
 	}
 	@SuppressWarnings("static-access")
 	public void outerGrid() {

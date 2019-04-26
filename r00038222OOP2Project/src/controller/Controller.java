@@ -106,13 +106,7 @@ public class Controller implements Serializable {
 		this.patientList = patientList;
 	}
 	//lists for patients,dentists,appointments, etc.
-	public static int getCount() {
-		return count;
-	}
-
-	public static void setCount(int count) {
-		instance.count = count;
-	}
+	
 	public DentistList getDentistList() {
 		return dentistList;
 	}

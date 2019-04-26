@@ -21,9 +21,11 @@ public class AppointmentGrid extends MyGridPane {
 	String fName;
 	String sName;
 	String ID;
+	
 	MyGridPane innerA;
 	Patient patient;
 	Controller instance;
+	
 	OverallAppointmentList appointments;
 	AppointmentDay day;
 	MyGridPane innerB;
@@ -32,12 +34,13 @@ public class AppointmentGrid extends MyGridPane {
 	Slot slot;
 	boolean ind = false;
 	int i;
-	int a;
+	int indexOfDay;
+	
 	public AppointmentGrid(Patient patient, int i) {
 		super();
 		this.instance = Controller.getInstance();
 		this.appointments = instance.getAppointmentList();
-
+		this.day = null;
 		setPatient(patient);
 		setI(i);
 		setfName(patient);
@@ -106,15 +109,16 @@ public class AppointmentGrid extends MyGridPane {
 			createNewDay(dateToCheck);
 			ind = true;// sets ind to true, date now exists.
 			day = (AppointmentDay) appointments.get(0); // sets day to this newly created day, which will be at index 0
+			this.indexOfDay = 0;
 			System.out.println("No days exist"); // because it is the first entry.
 		} else {
 			for (int i = 0; i < ListSize; i++) { // loops through the list to find the relevant day.
 				AppointmentDay d = (AppointmentDay) appointments.get(i);
 				Slot s = (Slot) d.get(0);// check the first element for the date.
-				if (s.getDay() == dateToCheck) {
+				if (s.getDay().equals(dateToCheck)) {
 					ind = true;// date found
 					day = d;
-					this.a = i;
+					this.indexOfDay = i;
 					break;// break from loop. There is no need to continue searching the list as each day
 							// should only exist once.
 				}
@@ -123,6 +127,7 @@ public class AppointmentGrid extends MyGridPane {
 		if (ind == false) {// if the day does not exist it is then created.
 			System.out.println("Date does not exist yet");
 			createNewDay(dateToCheck);
+			this.indexOfDay=instance.appointmentList.getSize()-1;
 		}
 
 		populate();
@@ -134,10 +139,11 @@ public class AppointmentGrid extends MyGridPane {
 		innerB.getChildren().clear();
 		try {
 			int rsize = day.getSize();
+			System.out.println("Size of Day is : "+rsize);
 			for (int i = 0; i < rsize; i++) {
 				slot = (Slot) day.get(i);
 				slot.setMyIndex(i);// this sets the index of this slot for use in updating
-				AppointmentDisplay searchPane = new AppointmentDisplay(i, this.a, this.i);
+				AppointmentDisplay searchPane = new AppointmentDisplay(i, indexOfDay, this.i);
 				searchPane.buildAppointmentSimpleFrame();
 				frames.add(searchPane);
 			}
@@ -163,6 +169,8 @@ public class AppointmentGrid extends MyGridPane {
 		innerB.setAlignment(Pos.CENTER);
 		populate();
 	}
+	
+	
 
 	public void createNewDay(LocalDate dateToCheck) { // creates the required day by populating the list with
 														// appointment slots for each hour and half hour from 8am to
@@ -180,6 +188,10 @@ public class AppointmentGrid extends MyGridPane {
 		this.day = newDay;
 		instance.appointmentList.addAppointment(newDay);// Adds the freshly created day to the appointment list
 		instance.update();
+	}
+	public void updateAppointmentsScreen(MyGridPane displayAppoinments) {
+		innerB.getChildren().clear();
+		innerB.getChildren().addAll(displayAppoinments);
 	}
 
 	public String getfName() {
