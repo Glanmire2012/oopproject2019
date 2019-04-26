@@ -1,11 +1,9 @@
-package Appointments;
+package list;
 
-import list.ObjectList;
-
+import Appointments.AppointmentDay;
+//This class stores appointments for all patients
 public class OverallAppointmentList extends ObjectList{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	public AppointmentDay day;
 	public int a;

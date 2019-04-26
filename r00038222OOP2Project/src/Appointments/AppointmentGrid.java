@@ -13,6 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import list.ObjectList;
+import list.OverallAppointmentList;
 import panes.MyGridPane;
 import person.Patient;
 
@@ -32,7 +33,19 @@ public class AppointmentGrid extends MyGridPane {
 	boolean ind = false;
 	int i;
 	int a;
+	public AppointmentGrid(Patient patient, int i) {
+		super();
+		this.instance = Controller.getInstance();
+		this.appointments = instance.getAppointmentList();
 
+		setPatient(patient);
+		setI(i);
+		setfName(patient);
+		setsName(patient);
+		setID(patient);
+		grid();
+
+	}
 	@SuppressWarnings("static-access")
 	public void grid() {
 		makeAppointment();
@@ -41,12 +54,7 @@ public class AppointmentGrid extends MyGridPane {
 		this.setConstraints(innerB, 0, 1);
 		final ColumnConstraints col1 = new ColumnConstraints(25, Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
 		final ColumnConstraints col2 = new ColumnConstraints(25, Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
-		// final ColumnConstraints col3 = new ColumnConstraints(25,
-		// Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
-		// final ColumnConstraints col4 = new ColumnConstraints(25,
-		// Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
-
-		// this.prefWidthProperty().bind(this.widthProperty());
+		
 		col2.setHgrow(Priority.ALWAYS);
 		this.getColumnConstraints().addAll(col1, col2);
 		this.getChildren().addAll(innerA, innerB);
@@ -106,7 +114,7 @@ public class AppointmentGrid extends MyGridPane {
 				if (s.getDay() == dateToCheck) {
 					ind = true;// date found
 					day = d;
-					a = i;
+					this.a = i;
 					break;// break from loop. There is no need to continue searching the list as each day
 							// should only exist once.
 				}
@@ -128,7 +136,9 @@ public class AppointmentGrid extends MyGridPane {
 			int rsize = day.getSize();
 			for (int i = 0; i < rsize; i++) {
 				slot = (Slot) day.get(i);
-				AppointmentDisplay searchPane = new AppointmentDisplay(slot,patient, i);
+				slot.setMyIndex(i);// this sets the index of this slot for use in updating
+				AppointmentDisplay searchPane = new AppointmentDisplay(i, this.a, this.i);
+				searchPane.buildAppointmentSimpleFrame();
 				frames.add(searchPane);
 			}
 		} catch (NullPointerException n) {
@@ -160,7 +170,7 @@ public class AppointmentGrid extends MyGridPane {
 		AppointmentDay newDay = new AppointmentDay();
 		int hour = 800;
 		for (int i = 0; i < 9; i++) {
-			Slot time = new Slot(dateToCheck, hour, 0);
+			Slot time = new Slot(dateToCheck, hour, -1);
 			newDay.addSlot(time);
 			Slot time30 = new Slot(dateToCheck, hour + 30, -1);
 			newDay.addSlot(time30);
@@ -169,7 +179,7 @@ public class AppointmentGrid extends MyGridPane {
 		System.out.println("Day created");
 		this.day = newDay;
 		instance.appointmentList.addAppointment(newDay);// Adds the freshly created day to the appointment list
-		instance.updateList();
+		instance.update();
 	}
 
 	public String getfName() {
@@ -212,17 +222,5 @@ public class AppointmentGrid extends MyGridPane {
 		this.i = i;
 	}
 
-	public AppointmentGrid(Patient patient, int i) {
-		super();
-		this.instance = Controller.getInstance();
-		this.appointments = instance.getAppointmentList();
-
-		setPatient(patient);
-		setI(i);
-		setfName(patient);
-		setsName(patient);
-		setID(patient);
-		grid();
-
-	}
+	
 }

@@ -2,13 +2,20 @@ package Appointments;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
+//These are the time slots for appointments, there are 18 in every day
 public class Slot implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public LocalDate day;
+	public int myIndex;// this stores the index of the slot
+	public int getMyIndex() {
+		return myIndex;
+	}
+	public void setMyIndex(int myIndex) {
+		this.myIndex = myIndex;
+	}
 	public int year;
 	public int doy;
 	private int time;
@@ -48,7 +55,7 @@ public class Slot implements Serializable{
 	}
 
 	public void setId(long l) {
-		this.id = l;
+		this.id = (int) l;
 	}
 	public long getAppointmentID() {
 		return appointmentID;

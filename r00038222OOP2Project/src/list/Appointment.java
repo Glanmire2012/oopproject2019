@@ -1,8 +1,14 @@
 package list;
+import java.io.Serializable;
 
+// this class is to store appointments within a patient object
 import Appointments.Slot;
 
-public class Appointment {
+public class Appointment implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String appointmentNotes;
 	private int appointmentID;
 	private Slot slot;

@@ -1,5 +1,5 @@
 package list;
-
+//This class stores appointments for individual patients
 public class AppointmentList extends ObjectList{
 
 	private static final long serialVersionUID = 1L;

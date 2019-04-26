@@ -2,9 +2,10 @@ package controller;
 
 import java.io.File;
 import java.io.Serializable;
-import Appointments.OverallAppointmentList;
+
 import javafx.stage.Stage;
 import list.DentistList;
+import list.OverallAppointmentList;
 import list.PatientList;
 import list.ProcedureList;
 import storage.FileStorage;
@@ -84,7 +85,13 @@ public class Controller implements Serializable {
 		System.out.println("List updated");
 
 	}
-	public void updateList() {
+	public void update(PatientList patient,OverallAppointmentList appointments) {
+		this.patientList = patient;
+		this.appointmentList = appointments;
+		new FileStorage().writeObject(instance, "storage.ser");
+		System.out.println("List updated");
+	}
+	public void update() {
 		
 		new FileStorage().writeObject(instance, "storage.ser");
 		System.out.println("List updated");

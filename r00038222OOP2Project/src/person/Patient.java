@@ -20,6 +20,14 @@ public class Patient extends Person{
 	LocalDate dob;
 	String phone;
 	AppointmentList appointments;
+	public AppointmentList getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(AppointmentList appointments) {
+		this.appointments = appointments;
+	}
+
 	public Patient() {
 		this.appointments = new AppointmentList();
 		
@@ -67,5 +75,6 @@ public class Patient extends Person{
 	public void setDob(LocalDate localDob) {
 		this.dob = localDob;
 	}
-	
+
+
 }
