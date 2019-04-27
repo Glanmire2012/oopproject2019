@@ -2,7 +2,6 @@ package panes;
 
 import java.time.LocalDate;
 
-import Appointments.AppointmentTab;
 import Appointments.NewAppointments;
 import controller.Controller;
 import javafx.scene.control.Button;

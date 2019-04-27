@@ -4,17 +4,17 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import tabs.SearchTab;
 import tabs.ShowAll;
-import tabs.newPatientTab;
+import tabs.NewPatientTab;
 
-public class patientManagement extends MyTabPane {
-	public patientManagement() {
+public class PatientManagement extends MyTabPane {
+	public PatientManagement() {
 	
 	BorderPane border = new BorderPane();
 	Tab NewPatients = new Tab("New Patient");
 	Tab Search = new Tab("Search");
 	Tab ShowAll = new Tab("Show All");
 	
-	newPatientTab newPat = new newPatientTab();
+	NewPatientTab newPat = new NewPatientTab();
 	SearchTab search = new SearchTab();
 	ShowAll showAll = new ShowAll();
 	NewPatients.setContent(newPat);

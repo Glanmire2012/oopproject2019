@@ -15,7 +15,7 @@ import panes.MyGridPane;
 import person.EnterPatient;
 import person.Patient;
 
-public class newPatientTab extends MyGridPane{
+public class NewPatientTab extends MyGridPane{
 	TextField fNameInput;
 	TextField sNameInput;
 	TextField AddressL1;
@@ -30,7 +30,7 @@ public class newPatientTab extends MyGridPane{
 	PatientList patientList= new PatientList();
 	
 	
-	public newPatientTab(){
+	public NewPatientTab(){
 
 		// First name label and entry
 		Label fNameLabel = new Label("First Name:");GridPane.setConstraints(fNameLabel, 0, 0);

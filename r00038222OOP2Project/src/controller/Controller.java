@@ -85,6 +85,12 @@ public class Controller implements Serializable {
 		System.out.println("List updated");
 
 	}
+	public void update(ProcedureList procedureList) {
+		this.procedureList = procedureList;
+		new FileStorage().writeObject(instance, "storage.ser");
+		System.out.println("List updated");
+
+	}
 	public void update(PatientList patient,OverallAppointmentList appointments) {
 		this.patientList = patient;
 		this.appointmentList = appointments;
