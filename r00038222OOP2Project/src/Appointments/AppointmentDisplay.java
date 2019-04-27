@@ -3,11 +3,11 @@ package Appointments;
 import controller.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import list.Appointment;
 import list.AppointmentList;
 import list.ObjectList;
 import list.OverallAppointmentList;
 import list.PatientList;
+import objects.Appointment;
 import objects.Patient;
 import screensanddisplay.MyGridPane;
 
@@ -41,8 +41,8 @@ public class AppointmentDisplay extends MyGridPane {
 	}
 
 	@SuppressWarnings("static-access")
-	public void buildAppointmentSimpleFrame() {
-
+	public void buildAppointmentSimpleFrame() { // displays appointments as time slots 
+		this.getChildren().clear();
 		this.patientList = instance.getPatientList();
 		this.patient = (Patient) patientList.get(patientIndex);
 		this.appointmentList = instance.getAppointmentList();
@@ -50,18 +50,19 @@ public class AppointmentDisplay extends MyGridPane {
 		Text timeText = new Text("" + time + "");
 		this.setConstraints(timeText, 0, 1);
 		if (booked == false) {
-			this.setStyle("-fx-background-color: GREEN;");
+			this.setStyle("-fx-background-color: GREEN;");//If a time slot is displayed green, it is bookable.
+			Text timeLabel = new Text("  AVAILABLE   ");this.setConstraints(timeLabel, 0, 2);
 			Button button = new Button("BOOK");
-
-			// this.prefWidthProperty().bind(this.widthProperty());
+			
 			button.setOnAction(e -> makeBooking());
 			this.setConstraints(button, 0, 0);
-			this.getChildren().addAll(button, timeText);
+			this.getChildren().addAll(button,timeLabel, timeText);
+			
 
 		} else if (booked == true) {
-			this.setStyle("-fx-background-color: RED;");
-			Text timeLabel = new Text("BOOKED");
-			this.setConstraints(timeLabel, 0, 0);
+			this.setStyle("-fx-background-color: RED;");// if a time slot is displayed red it is already allocated.
+			Text timeLabel = new Text("UNAVAILABLE");
+			this.setConstraints(timeLabel, 0, 2);
 			// this.prefWidthProperty().bind(this.widthProperty());
 			this.getChildren().addAll(timeLabel, timeText);
 		}
@@ -69,7 +70,7 @@ public class AppointmentDisplay extends MyGridPane {
 
 	}
 
-	public void makeBooking() {
+	public void makeBooking() {// once the BOOK button is pressed that time slot is allocated to the patient
 		if (slot.isBooked() == false) {
 			slot.setBooked(true);
 			System.out.println("Booking made " + slot.isBooked());
@@ -77,10 +78,12 @@ public class AppointmentDisplay extends MyGridPane {
 			Appointment newAppointment = new Appointment(slot);
 			AppointmentList list = patient.getAppointments();// gets a copy of the patients appointment list.
 			list.addAppointment(newAppointment);// adds the appointment to the list
-			patient.setAppointments(list);// sends the list back to the patient object to replace and update the
-											// appointment list
-			// instance.updatePatientList(patientList);// updates the controller
+			patient.setAppointments(list);// sends the list back to the patient object to replace and updates the
+										  // appointment list
+			
 			instance.update(patientList, appointmentList);
+			this.getChildren().clear();
+			buildAppointmentSimpleFrame();
 		}
 	}
 

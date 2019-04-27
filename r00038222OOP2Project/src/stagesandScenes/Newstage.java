@@ -5,8 +5,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import objects.Patient;
 import records.RecordGrid;
+import screensanddisplay.MyGridPane;
 
 public class Newstage {
+	
 	ScrollPane Layout;
 	Patient patient;
 	Stage window;
@@ -15,7 +17,9 @@ public class Newstage {
 	int b;
 	int i;
 	public Newstage() {
+		
 		setLayout(Layout);
+		Layout.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		setScene(scene);
 		setWindow(window);
 	}
@@ -74,6 +78,9 @@ public class Newstage {
 
 	public void setScene(Scene scene) {
 		this.scene = new Scene(Layout,600,450);
+	}
+	public void setScene() {
+		this.scene = new Scene(Layout,300,225);
 	}
 	
 }

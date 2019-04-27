@@ -1,8 +1,6 @@
 package procedures;
 
 import controller.Controller;
-import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import list.ProcedureList;
@@ -21,6 +19,7 @@ public class UpdateProcedures extends MyGridPane{
 		this.procedures = instance.getProcedureList();
 		this.i = i;
 	}
+	@SuppressWarnings("static-access")
 	public void edit() {
 		toBeEdited = (Procedure) procedures.get(i);
 		Text procedureLabel = new Text("Procedure Name : ");this.setConstraints(procedureLabel,0,0);

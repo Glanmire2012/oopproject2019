@@ -1,4 +1,7 @@
 package list;
+
+import objects.Appointment;
+
 //This class stores appointments for individual patients
 public class AppointmentList extends ObjectList{
 

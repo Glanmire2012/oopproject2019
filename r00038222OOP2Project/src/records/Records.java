@@ -16,7 +16,8 @@ public class Records extends Newstage{
 		getWindow().setScene(getScene());
 
         RecordGrid recordGrid = new RecordGrid(patient , i);
-        
+        recordGrid.maxWidthProperty().bind(getLayout().widthProperty());
+        recordGrid.minWidthProperty().bind(getLayout().widthProperty());
         getLayout().setContent(recordGrid);
 	}
 	

@@ -1,9 +1,10 @@
-package list;
+package objects;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 // this class is to store appointments within a patient object
 import Appointments.Slot;
+import list.ProceduresDone;
 
 public class Appointment implements Serializable{
 	
