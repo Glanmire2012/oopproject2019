@@ -5,9 +5,11 @@ import java.time.LocalDate;
 import controller.Controller;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Priority;
@@ -28,10 +30,12 @@ public class AppointmentGrid extends MyGridPane {
 	
 	OverallAppointmentList appointments;
 	AppointmentDay day;
+	LocalDate today;
 	MyGridPane innerB;
 	ObjectList store;
 	FlowPane slotPane = new FlowPane();
 	Slot slot;
+	Button update;
 	boolean ind = false;
 	int i;
 	int indexOfDay;
@@ -41,6 +45,7 @@ public class AppointmentGrid extends MyGridPane {
 		this.instance = Controller.getInstance();
 		this.appointments = instance.getAppointmentList();
 		this.day = null;
+		this.today = LocalDate.now();
 		setPatient(patient);
 		setI(i);
 		setfName(patient);
@@ -65,6 +70,7 @@ public class AppointmentGrid extends MyGridPane {
 
 	@SuppressWarnings("static-access")
 	public void makeAppointment() {
+		
 		innerA = new MyGridPane();
 		Text PIDLabel = new Text("PID");
 		innerA.setConstraints(PIDLabel, 0, 0);
@@ -83,18 +89,26 @@ public class AppointmentGrid extends MyGridPane {
 
 		Text dateLabel = new Text("Date :");
 		innerA.setConstraints(dateLabel, 0, 2);
-		DatePicker dateInput = new DatePicker();
+		
+		DatePicker dateInput = new DatePicker(today);
 		innerA.setConstraints(dateInput, 1, 2);
-
+		
 		// After entering the date the user clicks "check times" to get a list of times
 		// available for that day, if any.
-		Button check = new Button("Check Times");
-		innerA.setConstraints(check, 0, 3);
-		check.setOnAction(e -> checkAppointments(dateInput));
+		update = new Button("update");
+		Alert alert = new Alert(AlertType.INFORMATION);
+		dateInput.setOnAction(e -> {if (dateInput.getValue().isAfter(today)) {
+			checkAppointments(dateInput);}else {showAlert("Invalid Date","Must be a future date!!","Please Select a Date which is after today!!");}
+		});
+		
+		
+		
+		update.setOnAction(e -> checkAppointments(dateInput));
+		// This button is not visible until after the first date is picked	
 
 		innerA.prefWidthProperty().bind(this.widthProperty());
 		innerA.getChildren().addAll(PIDLabel, PIDtext, fNameLabel, fNameText, sNameLabel, sNameText, dateLabel,
-				dateInput, check);
+				dateInput);
 
 	}
 
@@ -102,7 +116,7 @@ public class AppointmentGrid extends MyGridPane {
 	public void checkAppointments(DatePicker dateInput) {
 		// checks for times available on a particular date.
 		LocalDate dateToCheck = dateInput.getValue();// date that needs to be checked.
-
+		
 		int ListSize = appointments.getSize();// gets the size of the appointment list.
 		if (ListSize == 0) { // if the list size is zero (first use), the required day is created and added
 								// to the list.
@@ -129,7 +143,8 @@ public class AppointmentGrid extends MyGridPane {
 			createNewDay(dateToCheck);
 			this.indexOfDay=instance.appointmentList.getSize()-1;
 		}
-
+		innerA.setConstraints(update, 0, 3);
+		innerA.getChildren().add(update);
 		populate();
 	}
 
@@ -192,6 +207,14 @@ public class AppointmentGrid extends MyGridPane {
 	public void updateAppointmentsScreen(MyGridPane displayAppoinments) {
 		innerB.getChildren().clear();
 		innerB.getChildren().addAll(displayAppoinments);
+	}
+	public void showAlert(String title, String intro, String context){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(intro);
+		alert.setContentText(context);
+		alert.showAndWait();
+		
 	}
 
 	public String getfName() {
