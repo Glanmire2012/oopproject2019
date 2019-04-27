@@ -1,4 +1,4 @@
-package tabs;
+package procedures;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import controller.Controller;
 import javafx.scene.control.ScrollPane;
 import list.ItemView;
 import list.ObjectList;
-import list.Procedure;
 import list.ProcedureList;
-import panes.MyGridPane;
+import objects.Procedure;
+import screensanddisplay.MyGridPane;
 
-public class DisplayProceduresTab extends ScrollPane implements Serializable {
+public class DisplayProcedures extends ScrollPane implements Serializable {
 	/**
 	 * 
 	 */
@@ -27,7 +27,7 @@ public class DisplayProceduresTab extends ScrollPane implements Serializable {
 	ArrayList<Double> prices;
 	ArrayList<String> description;
 	int size;
-	public DisplayProceduresTab() {
+	public DisplayProcedures() {
 		this.instance = Controller.getInstance();
 		this.procedureList = instance.getProcedureList();
 		proGrid = new MyGridPane();

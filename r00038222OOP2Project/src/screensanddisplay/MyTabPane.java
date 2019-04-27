@@ -1,4 +1,4 @@
-package panes;
+package screensanddisplay;
 
 import javafx.geometry.Side;
 import javafx.scene.control.TabPane;

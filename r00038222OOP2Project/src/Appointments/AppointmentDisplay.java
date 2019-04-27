@@ -8,8 +8,8 @@ import list.AppointmentList;
 import list.ObjectList;
 import list.OverallAppointmentList;
 import list.PatientList;
-import panes.MyGridPane;
-import person.Patient;
+import objects.Patient;
+import screensanddisplay.MyGridPane;
 
 public class AppointmentDisplay extends MyGridPane {
 	Controller instance;

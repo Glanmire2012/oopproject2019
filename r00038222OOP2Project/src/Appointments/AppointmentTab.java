@@ -2,7 +2,7 @@ package Appointments;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import panes.MyGridPane;
+import screensanddisplay.MyGridPane;
 
 public class AppointmentTab extends MyGridPane{
 	public AppointmentTab() {

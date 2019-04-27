@@ -1,4 +1,4 @@
-package person;
+package generateNumbers;
 
 import java.io.Serializable;
 import java.util.Calendar;

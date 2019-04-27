@@ -1,5 +1,7 @@
 package list;
 
+import objects.Procedure;
+
 public class ProceduresDone extends ObjectList{
 
 	private static final long serialVersionUID = 1L;

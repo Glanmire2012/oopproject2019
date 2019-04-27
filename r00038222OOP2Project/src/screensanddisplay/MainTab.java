@@ -1,9 +1,11 @@
-package panes;
+package screensanddisplay;
 
 import Appointments.AppointmentTab;
 import dataentry.Welcome;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
+import patient.PatientManagement;
+import procedures.ProcedureManagement;
 
 public class MainTab extends MyTabPane {
 	public MainTab() {	

@@ -12,9 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import list.ObjectList;
 import list.PatientList;
-import panes.MyGridPane;
-import panes.PatientDisplayPane;
-import person.Patient;
+import objects.Patient;
+import patient.PatientDisplayPane;
+import screensanddisplay.MyGridPane;
 import search.Search;
 
 

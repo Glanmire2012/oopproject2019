@@ -1,4 +1,4 @@
-package person;
+package dataentry;
 
 import java.time.LocalDate;
 
@@ -6,6 +6,7 @@ import controller.Controller;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import list.PatientList;
+import objects.Patient;
 
 public class EnterPatient {
 	Controller instance;

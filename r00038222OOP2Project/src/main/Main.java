@@ -1,10 +1,10 @@
 package main;
 
-import Login.LoginScene;
 import controller.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import panes.LoginGrid;
+import screensanddisplay.LoginGrid;
+import stagesandScenes.LoginScene;
 
 
 public class Main extends Application {

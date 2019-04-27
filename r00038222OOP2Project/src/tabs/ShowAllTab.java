@@ -12,11 +12,11 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import list.ObjectList;
 import list.PatientList;
-import panes.MyGridPane;
-import panes.PatientDisplayPane;
-import person.Patient;
+import objects.Patient;
+import patient.PatientDisplayPane;
+import screensanddisplay.MyGridPane;
 
-public class ShowAll extends MyGridPane{
+public class ShowAllTab extends MyGridPane{
 	PatientList patientList;
 	Controller instance;
 	TextField ID;
@@ -34,7 +34,7 @@ public class ShowAll extends MyGridPane{
 	ScrollPane scrollpane = new ScrollPane();
 	GridPane inner = new GridPane();
 
-	public ShowAll() {
+	public ShowAllTab() {
 
 		this.instance = Controller.getInstance();
 		this.patientList = instance.getPatientList();

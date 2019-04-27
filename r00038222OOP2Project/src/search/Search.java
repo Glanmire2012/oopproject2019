@@ -3,9 +3,9 @@ package search;
 import java.time.LocalDate;
 
 import controller.Controller;
+import generateNumbers.IDnumbers;
 import list.PatientList;
-import person.IDnumbers;
-import person.Patient;
+import objects.Patient;
 
 public class Search {
 	Controller instance;

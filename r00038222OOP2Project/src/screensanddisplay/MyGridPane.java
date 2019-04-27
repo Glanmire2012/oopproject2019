@@ -1,4 +1,4 @@
-package panes;
+package screensanddisplay;
 
 import Login.Login;
 import javafx.geometry.Insets;

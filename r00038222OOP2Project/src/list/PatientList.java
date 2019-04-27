@@ -1,6 +1,6 @@
 package list;
 
-import person.Patient;
+import objects.Patient;
 
 public class PatientList extends ObjectList {
 	private static final long serialVersionUID = 1L;

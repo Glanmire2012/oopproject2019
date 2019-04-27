@@ -1,8 +1,9 @@
-package panes;
+package records;
 
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import list.Appointment;
+import screensanddisplay.MyGridPane;
 
 public class RecordAppointmentDisplay extends MyGridPane{
 	

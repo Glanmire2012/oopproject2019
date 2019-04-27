@@ -1,7 +1,7 @@
 package Appointments;
 
-import person.Patient;
-import stages.Newstage;
+import objects.Patient;
+import stagesandScenes.Newstage;
 
 public class NewAppointments extends Newstage{
 	

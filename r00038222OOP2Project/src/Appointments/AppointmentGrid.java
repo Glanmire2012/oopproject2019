@@ -14,8 +14,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import list.ObjectList;
 import list.OverallAppointmentList;
-import panes.MyGridPane;
-import person.Patient;
+import objects.Patient;
+import screensanddisplay.MyGridPane;
 
 public class AppointmentGrid extends MyGridPane {
 	String fName;

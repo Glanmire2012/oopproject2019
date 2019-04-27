@@ -1,5 +1,7 @@
 package list;
 
+import objects.Procedure;
+
 public class ProcedureList extends ObjectList{
 	/**
 	 * 

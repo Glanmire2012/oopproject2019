@@ -5,15 +5,15 @@ package tabs;
 import java.time.LocalDate;
 
 import controller.Controller;
+import dataentry.EnterPatient;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import list.PatientList;
-import panes.MyGridPane;
-import person.EnterPatient;
-import person.Patient;
+import objects.Patient;
+import screensanddisplay.MyGridPane;
 
 public class NewPatientTab extends MyGridPane{
 	TextField fNameInput;

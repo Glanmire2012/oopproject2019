@@ -1,5 +1,7 @@
 package list;
 
+import objects.Dentist;
+
 public class DentistList extends ObjectList{
 	/**
 	 * 

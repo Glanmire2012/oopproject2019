@@ -1,9 +1,10 @@
-package panes;
+package records;
 
 import java.time.LocalDate;
 
 import Appointments.NewAppointments;
 import controller.Controller;
+import dataentry.EnterPatient;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -12,8 +13,8 @@ import javafx.scene.text.Text;
 import list.Appointment;
 import list.AppointmentList;
 import list.PatientList;
-import person.EnterPatient;
-import person.Patient;
+import objects.Patient;
+import screensanddisplay.MyGridPane;
 
 public class RecordGrid extends MyGridPane {
 	LocalDate dob;

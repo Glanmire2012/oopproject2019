@@ -1,6 +1,6 @@
 package tabs;
 
-import panes.MyGridPane;
+import screensanddisplay.MyGridPane;
 
 public class RecordsTab extends MyGridPane {
 	public RecordsTab() {

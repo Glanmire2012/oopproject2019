@@ -1,10 +1,10 @@
-package panes;
+package records;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-import person.Patient;
-import stages.Newstage;
+import objects.Patient;
+import stagesandScenes.Newstage;
 
 public class Records extends Newstage{
 	

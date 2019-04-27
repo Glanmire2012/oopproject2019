@@ -1,9 +1,10 @@
-package panes;
+package patient;
 
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
+import screensanddisplay.MyTabPane;
 import tabs.SearchTab;
-import tabs.ShowAll;
+import tabs.ShowAllTab;
 import tabs.NewPatientTab;
 
 public class PatientManagement extends MyTabPane {
@@ -16,7 +17,7 @@ public class PatientManagement extends MyTabPane {
 	
 	NewPatientTab newPat = new NewPatientTab();
 	SearchTab search = new SearchTab();
-	ShowAll showAll = new ShowAll();
+	ShowAllTab showAll = new ShowAllTab();
 	NewPatients.setContent(newPat);
 	Search.setContent(search);
 	ShowAll.setContent(showAll);

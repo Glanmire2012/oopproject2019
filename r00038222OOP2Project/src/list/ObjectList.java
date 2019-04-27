@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import person.Patient;
+import objects.Patient;
 
 public class ObjectList  implements Serializable {
 

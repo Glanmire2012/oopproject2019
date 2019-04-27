@@ -1,4 +1,4 @@
-package Login;
+package stagesandScenes;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;

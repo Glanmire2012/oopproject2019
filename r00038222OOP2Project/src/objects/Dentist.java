@@ -1,4 +1,4 @@
-package person;
+package objects;
 
 public class Dentist {
 	public Dentist() {

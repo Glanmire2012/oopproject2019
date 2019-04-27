@@ -1,4 +1,4 @@
-package panes;
+package patient;
 
 
 import java.awt.Label;
@@ -10,7 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import list.ObjectList;
 import list.PatientList;
-import person.Patient;
+import objects.Patient;
+import records.Records;
+import screensanddisplay.MyGridPane;
 import search.Search;
 
 public class PatientDisplayPane extends MyGridPane {

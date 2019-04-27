@@ -1,4 +1,4 @@
-package panes;
+package procedures;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import list.ItemView;
 import list.ObjectList;
-import list.Procedure;
 import list.ProcedureList;
-import tabs.DisplayProceduresTab;
+import objects.Procedure;
+import screensanddisplay.MyGridPane;
 
 public class ProcedureManagement extends GridPane implements Serializable{
 	/**
@@ -32,7 +32,7 @@ public class ProcedureManagement extends GridPane implements Serializable{
 	
 		
 		ScrollPane scroll = new ScrollPane();
-		DisplayProceduresTab disProc = new DisplayProceduresTab();
+		DisplayProcedures disProc = new DisplayProcedures();
 		//UpdateProceduresTab upProc = new UpdateProceduresTab();
 		this.getChildren().clear();
 		Button add = new Button("Add Procedure");this.setConstraints(add,0,0);

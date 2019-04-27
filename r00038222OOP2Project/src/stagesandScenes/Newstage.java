@@ -1,10 +1,10 @@
-package stages;
+package stagesandScenes;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-import panes.RecordGrid;
-import person.Patient;
+import objects.Patient;
+import records.RecordGrid;
 
 public class Newstage {
 	ScrollPane Layout;
