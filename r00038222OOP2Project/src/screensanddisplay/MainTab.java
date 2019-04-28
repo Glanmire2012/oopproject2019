@@ -1,6 +1,7 @@
 package screensanddisplay;
 
-import Appointments.AppointmentTab;
+import Appointments.AppoinmentManagement;
+import Appointments.DisplayAppoinments;
 import dataentry.Welcome;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +17,7 @@ public class MainTab extends MyTabPane {
 		Tab Appointments = new Tab("Appointments");
 		PatientManagement patMan = new PatientManagement();
 		ProcedureManagement proMan = new ProcedureManagement();
-		AppointmentTab appoint = new AppointmentTab();
+		AppoinmentManagement appoint = new AppoinmentManagement();
 
 		Patients.setContent(patMan);
 		Procedures.setContent(proMan);

@@ -124,6 +124,7 @@ public class RecordGrid extends MyGridPane {
 				makeAppointment);
 	}
 
+	@SuppressWarnings("static-access")
 	public void recordTopRight() { // Displays The patients appointments on the records screen.
 		innerTR = new MyGridPane();
 		ColumnConstraints innerCol = new ColumnConstraints();

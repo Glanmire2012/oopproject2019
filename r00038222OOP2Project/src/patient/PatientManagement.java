@@ -22,10 +22,9 @@ public class PatientManagement extends MyTabPane {
 	Search.setContent(search);
 	ShowAll.setContent(showAll);
 
-
-	this.getTabs().add(NewPatients);
-	this.getTabs().add(Search);
 	this.getTabs().add(ShowAll);
+	this.getTabs().add(Search);
+	this.getTabs().add(NewPatients);
 	
 	// bind to take available space
 	border.prefHeightProperty().bind(this.heightProperty());

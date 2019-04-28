@@ -2,8 +2,11 @@ package list;
 
 import java.io.Serializable;
 
+import Appointments.AppointmentSlot;
+import controller.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import objects.Patient;
 import objects.Procedure;
 import procedures.UpdateProcedures;
 import screensanddisplay.MyGridPane;
@@ -11,7 +14,11 @@ import screensanddisplay.MyGridPane;
 public class ItemView extends MyGridPane implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
+	Controller instance;
+	PatientList patientList;
+	Patient patient;
 	Procedure procedure;
+	AppointmentSlot slot;
 	int index;//index of the procedure in the procedure list. 
 public int getIndex() {
 		return index;
@@ -19,20 +26,18 @@ public int getIndex() {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-	//	public ItemView(int time) {
-//		this.time = time;
-//	}
+
 	public ItemView(Procedure procedure) {
 		this.procedure = procedure;
 		procedureGrid();
 	}
-//	@SuppressWarnings("static-access")
-//	public void appointmentGrid() { // Creates a frame for
-//		Text timeLabel = new Text("AVAILABLE");this.setConstraints(timeLabel,0,0);
-//		Text timeText = new Text("" + time + "");this.setConstraints(timeLabel,0,1);
-//		this.prefWidthProperty().bind(this.widthProperty());
-//		this.getChildren().addAll(timeLabel, timeText);
-//	}
+	public ItemView(AppointmentSlot slot) {
+		this.instance = Controller.getInstance();
+		this.patientList = instance.getPatientList();
+		this.slot =slot;
+		
+	}
+
 	@SuppressWarnings("static-access")
 	public void procedureGrid() {// Show procedure information
 		Text procedureLabel = new Text("Treatment : ");this.setConstraints(procedureLabel,0,0);
@@ -44,9 +49,39 @@ public int getIndex() {
 		Button edit = new Button("Edit");this.setConstraints(edit,0,3);
 		UpdateProcedures update = new UpdateProcedures(index);
 		edit.setOnAction(e -> update.edit());
-		this.prefWidthProperty().bind(this.widthProperty());
+		this.minWidthProperty().bind(this.widthProperty());
 		this.getChildren().addAll(procedureLabel, procedureText, descriptionLabel, descriptionText, priceLabel, priceText, edit);
 	}
-	
+	@SuppressWarnings("static-access")
+	public void appointmentGrid() {
+		long patID = slot.getId();
+		int listSize = patientList.getSize();
+		for ( int i =0; i < listSize; i++) {
+			patient = (Patient) patientList.get(i);
+			if (patient.getPatientID()==patID) {
+				this.patient = patient;
+				break;
+			}
+		}
+		
 
+		Text timeLabel = new Text("Time : ");this.setConstraints(timeLabel,0,0);
+		Text timeText = new Text(""+slot.getTime()+"");this.setConstraints(timeText,1,0);
+		Text dateLabel = new Text("Date : ");this.setConstraints(dateLabel,2,0);
+		Text dateText = new Text(""+slot.getDay()+"");this.setConstraints(dateText,3,0);
+		if (slot.getId()!=-1) {
+			Text PIDLabel = new Text("PID : ");this.setConstraints(PIDLabel,0,1);
+			Text PIDText = new Text(""+slot.getId()+"");this.setConstraints(PIDText,1,1);
+			Text nameLabel = new Text("Name : ");this.setConstraints(nameLabel,2,1);
+			Text nameText = new Text(""+patient.getFname()+" "+patient.getSname()+"");this.setConstraints(nameText,3,1);
+			Button access = new Button("Access Appointment");this.setConstraints(access,0,2,3,1);
+			this.getChildren().addAll(PIDLabel,PIDText,nameLabel,nameText,access);
+		}else {
+			Text noBookingText = new Text("NO BOOKING");this.setConstraints(noBookingText,0,1);
+			this.getChildren().add(noBookingText);
+		}
+		this.prefWidthProperty().bind(this.widthProperty());
+		this.getChildren().addAll(timeLabel,timeText,dateLabel,dateText);
+	
+	}
 }

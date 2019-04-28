@@ -1,11 +1,19 @@
 package Login;
 
+import java.time.LocalDate;
+
+import Appointments.AppointmentDay;
+import Appointments.AppointmentGrid;
+import Appointments.AppointmentSlot;
 import controller.Controller;
 import dataentry.HomeScene;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import list.OverallAppointmentList;
+import list.ProcedureList;
+import procedures.DisplayProcedures;
 import javafx.scene.control.Alert.AlertType;
 import screensanddisplay.MainTab;
 
@@ -14,10 +22,48 @@ public class Login {
 	final String user = "bucky";
 	final String password = "password";
 	Controller instance = Controller.getInstance();
+	boolean check = false;
 	public Login() {
 		super();
 		
 		//Controller instance = Controller.getInstance();
+		
+	}
+	public void initialise() {// To ensure that today exists in the appointment list
+							// and to create the default procedure list on first run.
+		LocalDate today = LocalDate.now();
+		OverallAppointmentList list = instance.getAppointmentList();
+		try {
+			int size = list.getSize();
+			for ( int i = 0; i < size; i++ ) {
+				AppointmentDay day = (AppointmentDay) list.get(i);
+				AppointmentSlot slot = (AppointmentSlot) day.get(0);
+				if (slot.day.equals(today)) {
+					check = true;
+				}
+			}
+			if ( check == false ) {
+				AppointmentGrid grid = new AppointmentGrid();
+				grid.createNewDay(today);
+			}
+					
+		}
+		catch(NullPointerException n){
+			AppointmentGrid grid = new AppointmentGrid();
+			grid.createNewDay(today);
+		}
+		try {
+			ProcedureList plist = new ProcedureList();
+			int psize = plist.getSize();
+			if ( psize == 0) {
+				DisplayProcedures disp = new DisplayProcedures();
+				disp.firstRun();		
+			}
+		}
+		catch(NullPointerException n) {
+			DisplayProcedures disp = new DisplayProcedures();
+			disp.firstRun();	
+		}
 		
 	}
 
@@ -32,6 +78,7 @@ public class Login {
 	
 	public void handleLogin(TextField nameInput,PasswordField passInput) {
 		instance.fileSetup();
+		initialise();
 		String username = nameInput.getText().toString();
 		boolean success = true;
 		
@@ -57,7 +104,7 @@ public class Login {
 			
 			root.getChildren().add(pane);
 			HomeScene scene = new HomeScene(root);
-			Alert alert = new Alert(AlertType.INFORMATION);
+			
 			showAlert("Login Success","Access Granted","You can now continue to the Homepage. Unauthorised use is strictly prohibitted");
 			//Controller instance = Controller.getInstance();
 			

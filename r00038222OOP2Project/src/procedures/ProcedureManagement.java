@@ -18,16 +18,7 @@ public class ProcedureManagement extends GridPane implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Controller instance;
-	ProcedureList procedureList;
-	Procedure procedure;
-	ItemView procedureView;
-	ObjectList forDisplay;
-	MyGridPane proGrid;
-	ArrayList<String> procedures;
-	ArrayList<Double> prices;
-	ArrayList<String> description;
-	int size;
+	
 	public ProcedureManagement() {
 	
 		

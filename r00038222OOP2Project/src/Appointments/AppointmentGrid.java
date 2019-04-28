@@ -34,9 +34,10 @@ public class AppointmentGrid extends MyGridPane {
 	MyGridPane innerB;
 	ObjectList store;
 	FlowPane slotPane = new FlowPane();
-	Slot slot;
+	AppointmentSlot slot;
 	Button update;
 	boolean ind = false;
+	boolean check = false;
 	int i;
 	int indexOfDay;
 	
@@ -53,6 +54,11 @@ public class AppointmentGrid extends MyGridPane {
 		setID(patient);
 		grid();
 
+	}
+	public AppointmentGrid() {
+		this.instance = Controller.getInstance();
+		this.appointments = instance.getAppointmentList();
+		this.today = LocalDate.now();
 	}
 	@SuppressWarnings("static-access")
 	public void grid() {
@@ -90,7 +96,7 @@ public class AppointmentGrid extends MyGridPane {
 		Text dateLabel = new Text("Date :");
 		innerA.setConstraints(dateLabel, 0, 2);
 		
-		DatePicker dateInput = new DatePicker(today);
+		DatePicker dateInput = new DatePicker();
 		innerA.setConstraints(dateInput, 1, 2);
 		
 		// After entering the date the user clicks "check times" to get a list of times
@@ -98,7 +104,7 @@ public class AppointmentGrid extends MyGridPane {
 		update = new Button("update");
 		Alert alert = new Alert(AlertType.INFORMATION);
 		dateInput.setOnAction(e -> {if (dateInput.getValue().isAfter(today)) {
-			checkAppointments(dateInput);}else {showAlert("Invalid Date","Must be a future date!!","Please Select a Date which is after today!!");}
+			checkAppointments(dateInput);}else if(dateInput.getValue().isEqual(today)){checkAppointments(dateInput);}else {showAlert("Invalid Date","Must be a future date!!","Please Select a Date which is after today!!");}
 		});
 		
 		
@@ -128,7 +134,7 @@ public class AppointmentGrid extends MyGridPane {
 		} else {
 			for (int i = 0; i < ListSize; i++) { // loops through the list to find the relevant day.
 				AppointmentDay d = (AppointmentDay) appointments.get(i);
-				Slot s = (Slot) d.get(0);// check the first element for the date.
+				AppointmentSlot s = (AppointmentSlot) d.get(0);// check the first element for the date.
 				if (s.getDay().equals(dateToCheck)) {
 					ind = true;// date found
 					day = d;
@@ -144,7 +150,10 @@ public class AppointmentGrid extends MyGridPane {
 			this.indexOfDay=instance.appointmentList.getSize()-1;
 		}
 		innerA.setConstraints(update, 0, 3);
-		innerA.getChildren().add(update);
+		if ( check == false) {
+			innerA.getChildren().add(update);
+		}
+		check = true;
 		populate();
 	}
 
@@ -156,7 +165,7 @@ public class AppointmentGrid extends MyGridPane {
 			int rsize = day.getSize();
 			System.out.println("Size of Day is : "+rsize);
 			for (int i = 0; i < rsize; i++) {
-				slot = (Slot) day.get(i);
+				slot = (AppointmentSlot) day.get(i);
 				slot.setMyIndex(i);// this sets the index of this slot for use in updating
 				AppointmentDisplay searchPane = new AppointmentDisplay(i, indexOfDay, this.i);
 				searchPane.buildAppointmentSimpleFrame();
@@ -193,9 +202,9 @@ public class AppointmentGrid extends MyGridPane {
 		AppointmentDay newDay = new AppointmentDay();
 		int hour = 800;
 		for (int i = 0; i < 9; i++) {
-			Slot time = new Slot(dateToCheck, hour, -1);
+			AppointmentSlot time = new AppointmentSlot(dateToCheck, hour, -1);
 			newDay.addSlot(time);
-			Slot time30 = new Slot(dateToCheck, hour + 30, -1);
+			AppointmentSlot time30 = new AppointmentSlot(dateToCheck, hour + 30, -1);
 			newDay.addSlot(time30);
 			hour = hour + 100;
 		}

@@ -3,7 +3,7 @@ package Appointments;
 import java.io.Serializable;
 import java.time.LocalDate;
 //These are the time slots for appointments, there are 18 in every day
-public class Slot implements Serializable{
+public class AppointmentSlot implements Serializable{
 	/**
 	 * 
 	 */
@@ -23,7 +23,7 @@ public class Slot implements Serializable{
 	private long appointmentID;
 	private boolean booked;
 	
-	public Slot(LocalDate day,int time, int id) {//each slot is a half hour time slot into which appointments are booked.
+	public AppointmentSlot(LocalDate day,int time, int id) {//each slot is a half hour time slot into which appointments are booked.
 		this.day = day;
 		this.time = time;
 		this.year = day.getYear();

@@ -68,6 +68,9 @@ public class DisplayProcedures extends ScrollPane implements Serializable {
 			instance.procedureList.addProcedure(item);
 		}
 		instance.update(procedureList);
-		
+	}
+	public void firstRun() {
+		buildArrayLists();
+		setupProcedures();
 	}
 }

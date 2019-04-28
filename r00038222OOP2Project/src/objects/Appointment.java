@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 // this class is to store appointments within a patient object
-import Appointments.Slot;
+import Appointments.AppointmentSlot;
 import list.ProceduresDone;
 
 public class Appointment implements Serializable{
@@ -11,10 +11,10 @@ public class Appointment implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String appointmentNotes;
 	private int appointmentID;
-	public Slot slot;
+	public AppointmentSlot slot;
 	private ProceduresDone procedures;
 	private LocalDate date;
-	public Appointment(Slot slot) {
+	public Appointment(AppointmentSlot slot) {
 		this.slot = slot;
 		setDate(slot.getDay());
 	}
@@ -36,10 +36,10 @@ public class Appointment implements Serializable{
 	public void setAppointmentNotes(String appointmentNotes) {
 		this.appointmentNotes = appointmentNotes;
 	}
-	public Slot getSlot() {
+	public AppointmentSlot getSlot() {
 		return slot;
 	}
-	public void setSlot(Slot slot) {
+	public void setSlot(AppointmentSlot slot) {
 		this.slot = slot;
 	}
 	public LocalDate getDate() {

@@ -13,7 +13,7 @@ import screensanddisplay.MyGridPane;
 
 public class AppointmentDisplay extends MyGridPane {
 	Controller instance;
-	Slot slot;
+	AppointmentSlot slot;
 	AppointmentDay day;
 	ObjectList store;
 	PatientList patientList;
@@ -33,7 +33,7 @@ public class AppointmentDisplay extends MyGridPane {
 		this.patientIndex = patientIndex;
 		this.day = (AppointmentDay) appointmentList.get(dayIndex);
 		this.slotIndex = slotIndex;
-		this.slot = (Slot) day.get(slotIndex);
+		this.slot = (AppointmentSlot) day.get(slotIndex);
 		System.out.println("day index = " + dayIndex);
 		System.out.println("slot index = " + slotIndex);
 		this.time = slot.getTime();

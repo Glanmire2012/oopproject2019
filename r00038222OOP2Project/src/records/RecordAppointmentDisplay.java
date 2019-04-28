@@ -13,6 +13,7 @@ public class RecordAppointmentDisplay extends MyGridPane{
 		this.appointment = appointment;
 	}
 		
+	@SuppressWarnings("static-access")
 	public void displayFrame() {
 		Text appDateLabel = new Text("Date : ");this.setConstraints(appDateLabel,0,1 );
 		
