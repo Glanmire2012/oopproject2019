@@ -3,7 +3,6 @@ package objects;
 import java.time.LocalDate;
 
 import list.AppointmentList;
-import list.ObjectList;
 
 public class Patient extends Person{
 	/**

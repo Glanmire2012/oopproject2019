@@ -138,7 +138,7 @@ public class RecordGrid extends MyGridPane {
 			int size = appointments.getSize();
 			for (int i = 0; i < size; i++) {
 				appointment = (Appointment) appointments.get(i);
-				RecordAppointmentDisplay frame = new RecordAppointmentDisplay(appointment);
+				RecordAppointmentDisplay frame = new RecordAppointmentDisplay(appointment,i,patient,this.i);
 				frame.displayFrame();
 				innerTR.setConstraints(frame, 0, i + 1);
 				innerTR.getChildren().add(frame);

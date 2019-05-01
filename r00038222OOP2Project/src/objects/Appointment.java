@@ -12,10 +12,11 @@ public class Appointment implements Serializable{
 	private String appointmentNotes;
 	private int appointmentID;
 	public AppointmentSlot slot;
-	private ProceduresDone procedures;
+	public ProceduresDone procedures;
 	private LocalDate date;
 	public Appointment(AppointmentSlot slot) {
 		this.slot = slot;
+		this.procedures = new ProceduresDone();
 		setDate(slot.getDay());
 	}
 	public ProceduresDone getProcedures() {

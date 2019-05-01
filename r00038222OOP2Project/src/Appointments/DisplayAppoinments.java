@@ -42,9 +42,10 @@ public class DisplayAppoinments extends ScrollPane{
 		grid.minWidthProperty().bind(this.maxWidthProperty());
 		try {//checks through appointmentLists for appointments for today
 			listSize = appointmentList.getSize();
+			if (listSize>0) {
 			for ( int i = 0; i < listSize; i++) {
 				day = (AppointmentDay) appointmentList.get(i);
-				slot = (AppointmentSlot) day.get(i);
+				slot = (AppointmentSlot) day.get(0);
 				if (slot.getDay().equals(today)){
 					int daySize = day.getSize();
 					for ( int a = 0; a < daySize; a++) {
@@ -58,6 +59,7 @@ public class DisplayAppoinments extends ScrollPane{
 			}
 			//grid.minWidthProperty().bind(this.prefWidthProperty());
 			this.setContent(grid);
+			}
 		}
 		catch (NullPointerException n) {
 			

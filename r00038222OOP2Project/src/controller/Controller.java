@@ -19,17 +19,21 @@ public class Controller implements Serializable {
 	private Stage myStage;
 
 
-	public PatientList patientList = new PatientList();
-	public DentistList dentistList = new DentistList();
-	public ProcedureList procedureList = new ProcedureList();
-	public OverallAppointmentList appointmentList = new OverallAppointmentList();
-	
+	public PatientList patientList =new PatientList();;
+	public DentistList dentistList ;
+	public ProcedureList procedureList;
+	public OverallAppointmentList appointmentList; 
+	public boolean state;
 	private FileStorage loadSave = new FileStorage();
 	private File storage = new File("Storage.ser");
 
 	public Controller() {
 		instance = this;
-	
+		this.appointmentList = new OverallAppointmentList();
+		//this.patientList = new PatientList();
+		this.procedureList = new ProcedureList();
+		this.dentistList = new DentistList();
+
 	}
 	public static Controller getInstance() {
 		if (instance == null) {
@@ -48,7 +52,7 @@ public class Controller implements Serializable {
 	}
 
 	public void fileSetup() {
-		boolean state = storage.exists();
+		this.state = storage.exists();
 
 		System.out.println(state);
 		try {
@@ -71,6 +75,12 @@ public class Controller implements Serializable {
 
 	
 
+	public boolean isState() {
+		return state;
+	}
+	public void setState(boolean state) {
+		this.state = state;
+	}
 	public PatientList getPatientList() {
 		return patientList;
 	}

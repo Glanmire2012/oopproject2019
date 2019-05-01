@@ -12,6 +12,7 @@ public class ProcedureList extends ObjectList{
 	
 	public ProcedureList addProcedure(Procedure procedure) {
 		this.procedure = procedure;
+		System.out.println("created procedure");
 		this.add(procedure);	
 		return null;
 	}	
