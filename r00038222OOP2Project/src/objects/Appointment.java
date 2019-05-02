@@ -14,6 +14,34 @@ public class Appointment implements Serializable{
 	public AppointmentSlot slot;
 	public ProceduresDone procedures;
 	private LocalDate date;
+	public double totalPrice;
+	public double outstanding ;
+	public boolean paid;
+	
+	public boolean isPaid() {
+		return paid;
+	}
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
+	public double getOutstanding() {
+		if (paid==true) {
+			setOutstanding(0.0);
+		}
+		return outstanding;
+	}
+	public void setOutstanding(double newCost) {
+		this.outstanding = totalPrice;
+	}
+	public void payOutstanding() {
+		this.outstanding = 0.0;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double newTotal) {
+		this.totalPrice = newTotal;
+	}
 	public Appointment(AppointmentSlot slot) {
 		this.slot = slot;
 		this.procedures = new ProceduresDone();

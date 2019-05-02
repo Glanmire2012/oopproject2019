@@ -1,7 +1,6 @@
 package screensanddisplay;
 
 import Appointments.AppoinmentManagement;
-import Appointments.DisplayAppoinments;
 import dataentry.Welcome;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
@@ -22,9 +21,8 @@ public class MainTab extends MyTabPane {
 		Patients.setContent(patMan);
 		Procedures.setContent(proMan);
 		Appointments.setContent(appoint);
-		Welcome welcome = new Welcome();
-		Welcome.setContent(welcome);
-		this.getTabs().add(Welcome);
+
+
 		this.getTabs().add(Patients);
 		this.getTabs().add(Appointments);
 		this.getTabs().add(Procedures);

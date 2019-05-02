@@ -11,6 +11,7 @@ import objects.Appointment;
 import objects.Patient;
 import objects.Procedure;
 import procedures.UpdateProcedures;
+import records.AccessRecord;
 import screensanddisplay.MyGridPane;
 
 public class ItemView extends MyGridPane implements Serializable {
@@ -23,6 +24,7 @@ public class ItemView extends MyGridPane implements Serializable {
 	AppointmentSlot slot;
 	Appointment appointment;
 	OverallAppointmentList ovapplist;
+	AccessRecord accessRec;
 	int index;// index of the procedure in the procedure list.
 
 	public int getIndex() {
@@ -45,15 +47,6 @@ public class ItemView extends MyGridPane implements Serializable {
 
 	}
 
-	public ItemView(Procedure procedure, Patient patient, Appointment appointment) {
-		this.procedure = procedure;
-		this.instance = Controller.getInstance();
-		this.patient = patient;
-		this.appointment = appointment;
-		this.patientList = instance.getPatientList();
-		this.ovapplist = instance.getAppointmentList();
-		selectProcedureFrames();
-	}
 
 	@SuppressWarnings("static-access")
 	public void procedureGrid() {// Show procedure information
@@ -71,8 +64,7 @@ public class ItemView extends MyGridPane implements Serializable {
 		this.setConstraints(priceText, 1, 2);
 		Button edit = new Button("Edit");
 		this.setConstraints(edit, 0, 3);
-		UpdateProcedures update = new UpdateProcedures(index);
-		edit.setOnAction(e -> update.edit());
+
 		this.minWidthProperty().bind(this.widthProperty());
 		this.getChildren().addAll(procedureLabel, procedureText, descriptionLabel, descriptionText, priceLabel,
 				priceText, edit);
@@ -107,9 +99,10 @@ public class ItemView extends MyGridPane implements Serializable {
 			this.setConstraints(nameLabel, 2, 1);
 			Text nameText = new Text("" + patient.getFname() + " " + patient.getSname() + "");
 			this.setConstraints(nameText, 3, 1);
-			Button access = new Button("Access Appointment");
-			this.setConstraints(access, 0, 2, 3, 1);
-			this.getChildren().addAll(PIDLabel, PIDText, nameLabel, nameText, access);
+			
+			
+			this.getChildren().addAll(PIDLabel, PIDText, nameLabel, nameText);
+			
 		} else {
 			Text noBookingText = new Text("NO BOOKING");
 			this.setConstraints(noBookingText, 0, 1);
@@ -120,69 +113,6 @@ public class ItemView extends MyGridPane implements Serializable {
 
 	}
 
-	public void selectProcedureFrames() {
-		boolean checked = false;
-		CheckBox check = new CheckBox(procedure.getProcedureName());
-		if (removeOrCheckProcedure(procedure, 2)==true) {
-			check.isArmed();
-		}
-		
-		this.setConstraints(check, 0, 0);
-		
-		check.setOnAction(e_ -> {
-			if (check.isSelected()) {
-				addProcedure(procedure);
-			} else if (!check.isSelected()) {
-				System.out.println(procedure.getProcedureName());
-			}
-		});
-		this.getChildren().add(check);
-	}
-
-	public void addProcedure(Procedure procedure) {
-		ProceduresDone procedures = null;
-		try {
-			procedures = appointment.getProcedures();
-			procedures.add(procedure);
-		} catch (NullPointerException n) {
-			procedures = new ProceduresDone();
-			procedures.add(procedure);
-		}
-
-		appointment.setProcedures(procedures);
-		instance.updatePatientList(patientList);
-		// System.out.println(procedures.getSize());
-
-	}
-
-	public boolean removeOrCheckProcedure(Procedure procedure, int function) {
-
-		ProceduresDone procedures = appointment.getProcedures();
-		int size = procedures.getSize();
-		int i;
-		for (i = 0; i < size; i++) {
-			Procedure p = (Procedure) procedures.get(i);
-			if (p.getProcedureName().contentEquals(procedure.getProcedureName())) {
-				switch (function) {
-				case 1:
-					procedures.removeProcedure(i);
-					appointment.setProcedures(procedures);
-					instance.update(patientList,ovapplist);
-					
-					break;
-				case 2:
-					return true;
-
-				default:
-					break;
-				}
-			}
-			return false;
-		}
-
-		System.out.println(procedures.getSize());
-		return false;
-
-	}
+	
 
 }

@@ -101,7 +101,7 @@ public class AppointmentGrid extends MyGridPane {
 		
 		// After entering the date the user clicks "check times" to get a list of times
 		// available for that day, if any.
-		update = new Button("update");
+	
 		Alert alert = new Alert(AlertType.INFORMATION);
 		dateInput.setOnAction(e -> {if (dateInput.getValue().isAfter(today)) {
 			checkAppointments(dateInput);}else if(dateInput.getValue().isEqual(today)){checkAppointments(dateInput);}else {showAlert("Invalid Date","Must be a future date!!","Please Select a Date which is after today!!");}
