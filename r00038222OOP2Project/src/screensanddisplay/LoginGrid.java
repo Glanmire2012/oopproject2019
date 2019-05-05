@@ -6,14 +6,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class LoginGrid extends MyGridPane{
-	public LoginGrid(){
+public class LoginGrid extends MyGridPane {
+	public LoginGrid() {
 		// Name Label - constrains use (child, column, row)
 		Label nameLabel = new Label("Username:");
 		GridPane.setConstraints(nameLabel, 0, 0);
 
 		// Name Input
-		nameInput = new TextField("Bucky");
+		nameInput = new TextField("User");
 		GridPane.setConstraints(nameInput, 1, 0);
 
 		// Password Label
@@ -27,8 +27,8 @@ public class LoginGrid extends MyGridPane{
 
 		// Login
 		Button loginButton = new Button("Log In");
-	
-		loginButton.setOnAction(e -> login.handleLogin(nameInput,passInput));
+
+		loginButton.setOnAction(e -> login.handleLogin(nameInput, passInput));
 		GridPane.setConstraints(loginButton, 1, 2);
 		GridPane.setConstraints(loginButton, 1, 2);
 		// Add everything to grid

@@ -5,12 +5,10 @@ import java.io.Serializable;
 import Appointments.AppointmentSlot;
 import controller.Controller;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 import objects.Appointment;
 import objects.Patient;
 import objects.Procedure;
-import procedures.UpdateProcedures;
 import records.AccessRecord;
 import screensanddisplay.MyGridPane;
 
@@ -46,7 +44,6 @@ public class ItemView extends MyGridPane implements Serializable {
 		this.slot = slot;
 
 	}
-
 
 	@SuppressWarnings("static-access")
 	public void procedureGrid() {// Show procedure information
@@ -99,10 +96,9 @@ public class ItemView extends MyGridPane implements Serializable {
 			this.setConstraints(nameLabel, 2, 1);
 			Text nameText = new Text("" + patient.getFname() + " " + patient.getSname() + "");
 			this.setConstraints(nameText, 3, 1);
-			
-			
+
 			this.getChildren().addAll(PIDLabel, PIDText, nameLabel, nameText);
-			
+
 		} else {
 			Text noBookingText = new Text("NO BOOKING");
 			this.setConstraints(noBookingText, 0, 1);
@@ -112,7 +108,5 @@ public class ItemView extends MyGridPane implements Serializable {
 		this.getChildren().addAll(timeLabel, timeText, dateLabel, dateText);
 
 	}
-
-	
 
 }

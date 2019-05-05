@@ -42,6 +42,7 @@ public class RecordGrid extends MyGridPane {
 	EnterPatient data;
 	NewAppointments makeNewAppointment;
 	int i;
+
 	public RecordGrid(Patient patient, int i) {
 		this.dob = patient.getDob();
 		this.i = i;
@@ -50,37 +51,31 @@ public class RecordGrid extends MyGridPane {
 		this.instance = Controller.getInstance();
 		this.patientList = instance.getPatientList();
 		this.makeNewAppointment = new NewAppointments(patient, i);
-		
+
 		recordTopLeft();
 		recordTopRight();
 		outerGrid();
-		
+
 		ColumnConstraints column1 = new ColumnConstraints();
-	    column1.setPercentWidth(48);
-	    this.getColumnConstraints().add(column1);
-	    ColumnConstraints column2 = new ColumnConstraints();
-	    column2.setPercentWidth(48);
-	    this.getColumnConstraints().add(column2);
+		column1.setPercentWidth(48);
+		this.getColumnConstraints().add(column1);
+		ColumnConstraints column2 = new ColumnConstraints();
+		column2.setPercentWidth(48);
+		this.getColumnConstraints().add(column2);
 	}
 
 	@SuppressWarnings("static-access")
 	public void recordTopLeft() {
 		innerTL = new MyGridPane();
-		
-		Text IDLabel = new Text("PID :");
+
+		Text IDLabel = new Text("PID : " + patient.getPatientID());
 		innerTL.setConstraints(IDLabel, 0, 0);
-		Text IDText = new Text("" + patient.getPatientID() + "");
-		innerTL.setConstraints(IDText, 1, 0);
 
-		Text fNameLabel = new Text("First Name: ");
+		Text fNameLabel = new Text("First Name: " + patient.getFname());
 		innerTL.setConstraints(fNameLabel, 0, 1);
-		fNameField = new TextField(patient.getFname());
-		innerTL.setConstraints(fNameField, 1, 1);
 
-		Text sNameLabel = new Text("Last Name: ");
+		Text sNameLabel = new Text("Last Name: " + patient.getSname());
 		innerTL.setConstraints(sNameLabel, 0, 2);
-		sNameField = new TextField(patient.getSname());
-		innerTL.setConstraints(sNameField, 1, 2);
 
 		Text Add1Label = new Text("Address: ");
 		innerTL.setConstraints(Add1Label, 0, 3);
@@ -119,17 +114,16 @@ public class RecordGrid extends MyGridPane {
 		delete.setOnAction(e -> patientList.remove(i));
 		innerTL.setConstraints(delete, 0, 11);
 
-		innerTL.getChildren().addAll(fNameLabel, fNameField, sNameLabel, sNameField, Add1Label, Add1Field, Add2Field,
-				Add3Field, cityField, countyField, phoneLabel, phoneField, IDLabel, IDText, amend, delete,
-				makeAppointment);
+		innerTL.getChildren().addAll(fNameLabel, sNameLabel, Add1Label, Add1Field, Add2Field, Add3Field, cityField,
+				countyField, phoneLabel, phoneField, IDLabel, amend, delete, makeAppointment);
 	}
 
 	@SuppressWarnings("static-access")
 	public void recordTopRight() { // Displays The patients appointments on the records screen.
 		innerTR = new MyGridPane();
 		ColumnConstraints innerCol = new ColumnConstraints();
-	    innerCol.setPercentWidth(100);
-	    innerTR.getColumnConstraints().add(innerCol);
+		innerCol.setPercentWidth(100);
+		innerTR.getColumnConstraints().add(innerCol);
 		Text heading = new Text("Appointments & Records");
 		innerTR.setConstraints(heading, 0, 0);
 		innerTR.getChildren().add(heading);
@@ -138,7 +132,7 @@ public class RecordGrid extends MyGridPane {
 			int size = appointments.getSize();
 			for (int i = 0; i < size; i++) {
 				appointment = (Appointment) appointments.get(i);
-				RecordAppointmentDisplay frame = new RecordAppointmentDisplay(appointment,i,patient,this.i);
+				RecordAppointmentDisplay frame = new RecordAppointmentDisplay(appointment, i, patient, this.i);
 				frame.displayFrame();
 				innerTR.setConstraints(frame, 0, i + 1);
 				innerTR.getChildren().add(frame);
@@ -147,6 +141,7 @@ public class RecordGrid extends MyGridPane {
 			Text notice = new Text("No Appointments Found.");
 			innerTR.setConstraints(notice, 0, 1);
 			innerTR.getChildren().add(notice);
+			// e.printStackTrace();
 		}
 
 	}

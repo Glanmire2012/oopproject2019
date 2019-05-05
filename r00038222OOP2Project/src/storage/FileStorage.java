@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class FileStorage implements Serializable {
-    public Object readObject(String fileName) {
+	public Object readObject(String fileName) {
 		Object ob = null;
 		try {
 			FileInputStream fileIn = new FileInputStream(fileName);
@@ -16,9 +16,9 @@ public class FileStorage implements Serializable {
 			ob = in.readObject();
 			in.close();
 		} catch (IOException i) {
-			//i.printStackTrace();
+			// i.printStackTrace();
 		} catch (ClassNotFoundException c) {
-			//c.printStackTrace();
+			// c.printStackTrace();
 		}
 		return ob;
 	}
@@ -29,11 +29,10 @@ public class FileStorage implements Serializable {
 			FileOutputStream fileOut = new FileOutputStream(fileName);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(ob);
-			System.out.println("written");
 			out.close();
 			fileOut.close();
 		} catch (IOException i) {
-			i.printStackTrace();
+			// i.printStackTrace();
 			success = false;
 		}
 		return success;

@@ -1,17 +1,15 @@
 package screensanddisplay;
 
 import Appointments.AppoinmentManagement;
-import dataentry.Welcome;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import patient.PatientManagement;
 import procedures.ProcedureManagement;
 
 public class MainTab extends MyTabPane {
-	public MainTab() {	
+	public MainTab() {
 		BorderPane border = new BorderPane();
 		Tab Patients = new Tab("Patient Management");
-		Tab Welcome = new Tab("CIT Dental");
 		Tab Procedures = new Tab("Procedures");
 		Tab Appointments = new Tab("Appointments");
 		PatientManagement patMan = new PatientManagement();
@@ -22,7 +20,6 @@ public class MainTab extends MyTabPane {
 		Procedures.setContent(proMan);
 		Appointments.setContent(appoint);
 
-
 		this.getTabs().add(Patients);
 		this.getTabs().add(Appointments);
 		this.getTabs().add(Procedures);
@@ -30,7 +27,5 @@ public class MainTab extends MyTabPane {
 		border.prefHeightProperty().bind(this.heightProperty());
 		border.prefWidthProperty().bind(this.widthProperty());
 
-		//border.setTop(this);
 	}
 }
-

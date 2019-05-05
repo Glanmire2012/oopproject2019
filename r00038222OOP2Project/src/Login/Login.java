@@ -7,7 +7,6 @@ import Appointments.AppointmentDay;
 import Appointments.AppointmentGrid;
 import Appointments.AppointmentSlot;
 import controller.Controller;
-import dataentry.HomeScene;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -17,10 +16,11 @@ import list.ProcedureList;
 import procedures.DisplayProcedures;
 import javafx.scene.control.Alert.AlertType;
 import screensanddisplay.MainTab;
+import stagesandScenes.HomeScene;
 
 public class Login {
 	// login details
-	final String user = "bucky";
+	final String user = "User";
 	final String password = "password";
 	Controller instance = Controller.getInstance();
 	ProcedureList pList;
@@ -54,23 +54,22 @@ public class Login {
 		} catch (NullPointerException n) {
 			AppointmentGrid grid = new AppointmentGrid();
 			grid.createNewDay(today);
+			// n.printStackTrace();
 		}
 		try {
 			pList = instance.getProcedureList();
-			
+
 			if (instance.isState() == false) {
 				int psize = pList.getSize();
-				System.out.println("plist size"+psize);
 				if (psize == 0) {
 					DisplayProcedures disp = new DisplayProcedures();
 					disp.firstRun();
-					System.out.println("pro list created");
 
 				}
-			
+
 			}
 		} catch (NullPointerException n) {
-
+			// n.printStackTrace();
 		}
 
 	}
@@ -115,7 +114,6 @@ public class Login {
 
 			showAlert("Login Success", "Access Granted",
 					"You can now continue to the Homepage. Unauthorised use is strictly prohibitted");
-			// Controller instance = Controller.getInstance();
 
 			instance.getStage().setScene(scene);
 		}

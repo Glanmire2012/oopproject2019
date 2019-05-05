@@ -9,8 +9,8 @@ import objects.Appointment;
 import objects.Patient;
 import objects.Procedure;
 
-public class checkBoxForProcedures extends GridPane {
-	
+public class CheckBoxForProcedures extends GridPane {
+
 	Controller instance;
 	PatientList patientList;
 	Patient patient;
@@ -19,8 +19,7 @@ public class checkBoxForProcedures extends GridPane {
 	Appointment appointment;
 	ProceduresDone procedureList;
 
-	
-	public checkBoxForProcedures(Procedure procedure, Patient patient, int appointmentIndex) {
+	public CheckBoxForProcedures(Procedure procedure, Patient patient, int appointmentIndex) {
 		this.procedure = procedure;
 		this.instance = Controller.getInstance();
 		this.patient = patient;
@@ -29,26 +28,25 @@ public class checkBoxForProcedures extends GridPane {
 		this.procedureList = appointment.getProcedures();
 		selectProcedureFrames();
 	}
-	
+
 	public void selectProcedureFrames() {
-		
-		
+
 		CheckBox check = new CheckBox(procedure.getProcedureName());
-				
+
 		check.setOnAction(e_ -> {
 			boolean alreadyListed = false;
 			if (check.isSelected()) { // this will only add the procedure if its not already on the list.
 				int size = procedureList.getSize();
-				for ( int i = 0; i < size; i++) {
+				for (int i = 0; i < size; i++) {
 					Procedure pro = (Procedure) procedureList.get(i);
 					if (pro.getProcedureName().equals(procedure.getProcedureName())) {
 						alreadyListed = true;
 					}
 				}
 				if (alreadyListed == false) {
-				addProcedure(procedure);
+					addProcedure(procedure);
 				}
-			} 
+			}
 		});
 		this.getChildren().add(check);
 	}
@@ -58,18 +56,15 @@ public class checkBoxForProcedures extends GridPane {
 		try {
 			procedures = appointment.getProcedures();
 			procedures.add(procedure);
-			System.out.println("added");
+
 		} catch (NullPointerException n) {
 			procedures = new ProceduresDone();
 			procedures.add(procedure);
+			// n.printStackTrace();
 		}
 
-		//appointment.setProcedures(procedures);
 		instance.updatePatientList(patientList);
-		// System.out.println(procedures.getSize());
 
 	}
-	
-
 
 }

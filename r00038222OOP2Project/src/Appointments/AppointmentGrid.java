@@ -23,11 +23,11 @@ public class AppointmentGrid extends MyGridPane {
 	String fName;
 	String sName;
 	String ID;
-	
+
 	MyGridPane innerA;
 	Patient patient;
 	Controller instance;
-	
+
 	OverallAppointmentList appointments;
 	AppointmentDay day;
 	LocalDate today;
@@ -40,7 +40,7 @@ public class AppointmentGrid extends MyGridPane {
 	boolean check = false;
 	int i;
 	int indexOfDay;
-	
+
 	public AppointmentGrid(Patient patient, int i) {
 		super();
 		this.instance = Controller.getInstance();
@@ -55,11 +55,13 @@ public class AppointmentGrid extends MyGridPane {
 		grid();
 
 	}
+
 	public AppointmentGrid() {
 		this.instance = Controller.getInstance();
 		this.appointments = instance.getAppointmentList();
 		this.today = LocalDate.now();
 	}
+
 	@SuppressWarnings("static-access")
 	public void grid() {
 		makeAppointment();
@@ -68,7 +70,7 @@ public class AppointmentGrid extends MyGridPane {
 		this.setConstraints(innerB, 0, 1);
 		final ColumnConstraints col1 = new ColumnConstraints(25, Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
 		final ColumnConstraints col2 = new ColumnConstraints(25, Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
-		
+
 		col2.setHgrow(Priority.ALWAYS);
 		this.getColumnConstraints().addAll(col1, col2);
 		this.getChildren().addAll(innerA, innerB);
@@ -76,7 +78,7 @@ public class AppointmentGrid extends MyGridPane {
 
 	@SuppressWarnings("static-access")
 	public void makeAppointment() {
-		
+
 		innerA = new MyGridPane();
 		Text PIDLabel = new Text("PID");
 		innerA.setConstraints(PIDLabel, 0, 0);
@@ -95,22 +97,26 @@ public class AppointmentGrid extends MyGridPane {
 
 		Text dateLabel = new Text("Date :");
 		innerA.setConstraints(dateLabel, 0, 2);
-		
+
 		DatePicker dateInput = new DatePicker();
 		innerA.setConstraints(dateInput, 1, 2);
-		
+
 		// After entering the date the user clicks "check times" to get a list of times
 		// available for that day, if any.
-	
+		update = new Button("update");
 		Alert alert = new Alert(AlertType.INFORMATION);
-		dateInput.setOnAction(e -> {if (dateInput.getValue().isAfter(today)) {
-			checkAppointments(dateInput);}else if(dateInput.getValue().isEqual(today)){checkAppointments(dateInput);}else {showAlert("Invalid Date","Must be a future date!!","Please Select a Date which is after today!!");}
+		dateInput.setOnAction(e -> {
+			if (dateInput.getValue().isAfter(today)) {
+				checkAppointments(dateInput);
+			} else if (dateInput.getValue().isEqual(today)) {
+				checkAppointments(dateInput);
+			} else {
+				showAlert("Invalid Date", "Must be a future date!!", "Please Select a Date which is after today!!");
+			}
 		});
-		
-		
-		
+
 		update.setOnAction(e -> checkAppointments(dateInput));
-		// This button is not visible until after the first date is picked	
+		// This button is not visible until after the first date is picked
 
 		innerA.prefWidthProperty().bind(this.widthProperty());
 		innerA.getChildren().addAll(PIDLabel, PIDtext, fNameLabel, fNameText, sNameLabel, sNameText, dateLabel,
@@ -122,7 +128,7 @@ public class AppointmentGrid extends MyGridPane {
 	public void checkAppointments(DatePicker dateInput) {
 		// checks for times available on a particular date.
 		LocalDate dateToCheck = dateInput.getValue();// date that needs to be checked.
-		
+
 		int ListSize = appointments.getSize();// gets the size of the appointment list.
 		if (ListSize == 0) { // if the list size is zero (first use), the required day is created and added
 								// to the list.
@@ -130,7 +136,7 @@ public class AppointmentGrid extends MyGridPane {
 			ind = true;// sets ind to true, date now exists.
 			day = (AppointmentDay) appointments.get(0); // sets day to this newly created day, which will be at index 0
 			this.indexOfDay = 0;
-			System.out.println("No days exist"); // because it is the first entry.
+
 		} else {
 			for (int i = 0; i < ListSize; i++) { // loops through the list to find the relevant day.
 				AppointmentDay d = (AppointmentDay) appointments.get(i);
@@ -145,12 +151,11 @@ public class AppointmentGrid extends MyGridPane {
 			}
 		}
 		if (ind == false) {// if the day does not exist it is then created.
-			System.out.println("Date does not exist yet");
 			createNewDay(dateToCheck);
-			this.indexOfDay=instance.appointmentList.getSize()-1;
+			this.indexOfDay = instance.appointmentList.getSize() - 1;
 		}
 		innerA.setConstraints(update, 0, 3);
-		if ( check == false) {
+		if (check == false) {
 			innerA.getChildren().add(update);
 		}
 		check = true;
@@ -163,7 +168,6 @@ public class AppointmentGrid extends MyGridPane {
 		innerB.getChildren().clear();
 		try {
 			int rsize = day.getSize();
-			System.out.println("Size of Day is : "+rsize);
 			for (int i = 0; i < rsize; i++) {
 				slot = (AppointmentSlot) day.get(i);
 				slot.setMyIndex(i);// this sets the index of this slot for use in updating
@@ -172,12 +176,11 @@ public class AppointmentGrid extends MyGridPane {
 				frames.add(searchPane);
 			}
 		} catch (NullPointerException n) {
-			System.out.println("Null pointer");
+			// n.printStackTrace();
 		}
 		// Add the result frames to the result pane which is a gridpane.
 		int size = frames.getSize();
-		System.out.println("reslults frame size " + size);
-		
+
 		for (int i = 0; i < size; i++) {
 			slotPane.getChildren().add((Node) frames.get(i));
 		}
@@ -193,8 +196,6 @@ public class AppointmentGrid extends MyGridPane {
 		innerB.setAlignment(Pos.CENTER);
 		populate();
 	}
-	
-	
 
 	public void createNewDay(LocalDate dateToCheck) { // creates the required day by populating the list with
 														// appointment slots for each hour and half hour from 8am to
@@ -208,22 +209,24 @@ public class AppointmentGrid extends MyGridPane {
 			newDay.addSlot(time30);
 			hour = hour + 100;
 		}
-		System.out.println("Day created");
+
 		this.day = newDay;
 		instance.appointmentList.addAppointment(newDay);// Adds the freshly created day to the appointment list
 		instance.update();
 	}
+
 	public void updateAppointmentsScreen(MyGridPane displayAppoinments) {
 		innerB.getChildren().clear();
 		innerB.getChildren().addAll(displayAppoinments);
 	}
-	public void showAlert(String title, String intro, String context){
+
+	public void showAlert(String title, String intro, String context) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(title);
 		alert.setHeaderText(intro);
 		alert.setContentText(context);
 		alert.showAndWait();
-		
+
 	}
 
 	public String getfName() {
@@ -266,5 +269,4 @@ public class AppointmentGrid extends MyGridPane {
 		this.i = i;
 	}
 
-	
 }

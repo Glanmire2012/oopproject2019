@@ -22,18 +22,18 @@ public class AppoinmentManagement extends GridPane implements Serializable {
 		this.getColumnConstraints().add(column);
 		ScrollPane scroll = new ScrollPane();
 		DisplayAppoinments disApp = new DisplayAppoinments();
-	
+
 		this.getChildren().clear();
-		Button add = new Button("n");this.setConstraints(add,0,0);
-		scroll.setContent(disApp);this.setConstraints(scroll,0,1);
+		Button add = new Button("n");
+		this.setConstraints(add, 0, 0);
+		scroll.setContent(disApp);
+		this.setConstraints(scroll, 0, 1);
 		this.getChildren().addAll(scroll, add);
-		//this.getTabs().add(updateProcedures);
-		
-		
+
 		// bind to take available space
 		this.minWidthProperty().bind(this.widthProperty());
 		this.prefHeightProperty().bind(this.heightProperty());
 		this.prefWidthProperty().bind(this.widthProperty());
 	}
-	
+
 }

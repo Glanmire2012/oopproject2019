@@ -1,10 +1,6 @@
 package objects;
 
 import controller.Controller;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import list.AppointmentList;
@@ -25,7 +21,7 @@ public class Invoice extends GridPane{
 
 	ProceduresDone proceduresDone;
 	int appointmentIndex;
-	int PatientIndex;
+	int patientIndex;
 	
 	public Invoice(Appointment appointment, int appointmentIndex, Patient patient, int patientIndex) {
 		super();
@@ -35,9 +31,9 @@ public class Invoice extends GridPane{
 		this.appointmentList = patient.getAppointments();
 		
 		this.appointmentIndex = appointmentIndex;
-		this.PatientIndex = PatientIndex;
+		this.patientIndex = patientIndex;
 		
-		this.patient = (Patient) patientList.get(PatientIndex);
+		this.patient = (Patient) patientList.get(patientIndex);
 		this.appointment = appointment;
 		
 		this.procedures = instance.getProcedureList();

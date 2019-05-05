@@ -12,7 +12,7 @@ import objects.Appointment;
 import objects.Patient;
 import screensanddisplay.MyGridPane;
 
-public class DisplayAppoinments extends ScrollPane{
+public class DisplayAppoinments extends ScrollPane {
 	Controller instance;
 	OverallAppointmentList appointmentList;
 	PatientList patientList;
@@ -24,14 +24,15 @@ public class DisplayAppoinments extends ScrollPane{
 	int listSize;
 	Patient patient;
 	LocalDate today;
-	
+
 	public DisplayAppoinments() {
 		this.instance = Controller.getInstance();
 		this.appointmentList = instance.getAppointmentList();
 		this.today = LocalDate.now();
-		
+
 		display();
 	}
+
 	@SuppressWarnings("static-access")
 	public void display() {
 
@@ -40,29 +41,30 @@ public class DisplayAppoinments extends ScrollPane{
 		column.setPercentWidth(100);
 		grid.getColumnConstraints().add(column);
 		grid.minWidthProperty().bind(this.maxWidthProperty());
-		try {//checks through appointmentLists for appointments for today
+		try {// checks through appointmentLists for appointments for today
 			listSize = appointmentList.getSize();
-			if (listSize>0) {
-			for ( int i = 0; i < listSize; i++) {
-				day = (AppointmentDay) appointmentList.get(i);
-				slot = (AppointmentSlot) day.get(0);
-				if (slot.getDay().equals(today)){
-					int daySize = day.getSize();
-					for ( int a = 0; a < daySize; a++) {
-						slot = (AppointmentSlot) day.get(a);
-						appointmentView = new ItemView(slot);// Sends the relevant day to item view to construct viewable frames to display.
-						appointmentView.appointmentGrid();grid.setConstraints(appointmentView,0,a);
-						grid.getChildren().add(appointmentView);
+			if (listSize > 0) {
+				for (int i = 0; i < listSize; i++) {
+					day = (AppointmentDay) appointmentList.get(i);
+					slot = (AppointmentSlot) day.get(0);
+					if (slot.getDay().equals(today)) {
+						int daySize = day.getSize();
+						for (int a = 0; a < daySize; a++) {
+							slot = (AppointmentSlot) day.get(a);
+							appointmentView = new ItemView(slot);// Sends the relevant day to item view to construct
+																	// viewable frames to display.
+							appointmentView.appointmentGrid();
+							grid.setConstraints(appointmentView, 0, a);
+							grid.getChildren().add(appointmentView);
+						}
+						break;
 					}
-					break;
 				}
+
+				this.setContent(grid);
 			}
-			//grid.minWidthProperty().bind(this.prefWidthProperty());
-			this.setContent(grid);
-			}
-		}
-		catch (NullPointerException n) {
-			
+		} catch (NullPointerException n) {
+			// n.printStackTrace();
 		}
 	}
 }

@@ -13,31 +13,28 @@ import list.ProcedureList;
 import objects.Procedure;
 import screensanddisplay.MyGridPane;
 
-public class ProcedureManagement extends GridPane implements Serializable{
+public class ProcedureManagement extends GridPane implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public ProcedureManagement() {
-	
-		
+
 		ScrollPane scroll = new ScrollPane();
 		DisplayProcedures disProc = new DisplayProcedures();
-		//UpdateProceduresTab upProc = new UpdateProceduresTab();
+
 		this.getChildren().clear();
-		Button add = new Button("Add Procedure");this.setConstraints(add,0,0);
-		scroll.setContent(disProc);this.setConstraints(scroll,0,1);
-		this.getChildren().addAll(scroll, add);
-		//this.getTabs().add(updateProcedures);
-		
-		
+
+		scroll.setContent(disProc);
+		this.setConstraints(scroll, 0, 1);
+		this.getChildren().addAll(scroll);
+
 		// bind to take available space
 		this.prefWidthProperty().bind(this.widthProperty());
 		this.prefHeightProperty().bind(this.heightProperty());
 		this.prefWidthProperty().bind(this.widthProperty());
 
-		//border.setTop(this);
 	}
 
 }

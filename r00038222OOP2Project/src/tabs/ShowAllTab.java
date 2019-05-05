@@ -16,7 +16,7 @@ import objects.Patient;
 import patient.PatientDisplayPane;
 import screensanddisplay.MyGridPane;
 
-public class ShowAllTab extends MyGridPane{
+public class ShowAllTab extends MyGridPane {
 	PatientList patientList;
 	Controller instance;
 	TextField ID;
@@ -40,44 +40,45 @@ public class ShowAllTab extends MyGridPane{
 		this.patientList = instance.getPatientList();
 		this.resultsPane = new MyGridPane();
 		this.getChildren().clear();
-		
-		
+
 		display();
 	}
-	
+
 	@SuppressWarnings("static-access")
 	public void display() {
-		
-		Label Heading = new Label("List of all current Patients");GridPane.setConstraints(Heading, 0, 0, 5, 1);
+
+		Label Heading = new Label("List of all current Patients");
+		GridPane.setConstraints(Heading, 0, 0, 5, 1);
 		int size = patientList.getSize();
 		GridPane.setConstraints(scrollpane, 0, 4);
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		ObjectList resultFrames = new ObjectList();
-		System.out.println("Patient list size is: "+size);
-		for(int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) {
 			patient = (Patient) patientList.get(i);
-			PatientDisplayPane srPane = new PatientDisplayPane(patient,i);
+			PatientDisplayPane srPane = new PatientDisplayPane(patient, i);
 			resultFrames.add(srPane);
 			srPane.prefWidthProperty().bind(this.widthProperty());
 		}
-		
-		//resultFrames.sort(Comparator.comparing(Patient::getSname));
+
+		// resultFrames.sort(Comparator.comparing(Patient::getSname));
 		int rsize = resultFrames.getSize();
 		for (int i = 0; i < rsize; i++) {
-			GridPane.setConstraints((Node)resultFrames.get(i),0,i);
-			resultsPane.getChildren().add((Node)resultFrames.get(i));
+			GridPane.setConstraints((Node) resultFrames.get(i), 0, i);
+			resultsPane.getChildren().add((Node) resultFrames.get(i));
 		}
 		scrollpane.setContent(resultsPane);
-		
+
 		resultsPane.prefWidthProperty().bind(this.widthProperty());
 		scrollpane.prefWidthProperty().bind(this.widthProperty());
 		scrollpane.prefHeightProperty().bind(this.heightProperty());
-		Button refresh = new Button("Refresh");this.setConstraints(refresh,0, 6);
-		refresh.setOnAction(e -> reload() );
+		Button refresh = new Button("Refresh");
+		this.setConstraints(refresh, 0, 6);
+		refresh.setOnAction(e -> reload());
 		this.getChildren().clear();
-		this.getChildren().addAll(Heading,scrollpane, refresh);
-		
+		this.getChildren().addAll(Heading, scrollpane, refresh);
+
 	}
+
 	public void reload() {
 		instance = Controller.getInstance();
 		instance.getPatientList();

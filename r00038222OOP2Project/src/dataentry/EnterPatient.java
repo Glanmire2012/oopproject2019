@@ -13,30 +13,33 @@ public class EnterPatient {
 	PatientList patientList;
 	LocalDate localDob;
 	Patient patient;
-	
+
 	public EnterPatient() {
 		instance = Controller.getInstance();
 		patientList = instance.getPatientList();
 	}
-	//Enter new Patient
+
+	// Enter new Patient
 	public Object enterPatient(TextField fNameInput, TextField sNameInput, TextField addressL1, TextField addressL2,
 			TextField addressL3, TextField city, TextField county, TextField phone, DatePicker dob) {
-		patient =new Patient();
-		data(fNameInput, sNameInput, addressL1, addressL2,	addressL3, city, county, phone, dob);		
+		patient = new Patient();
+		data(fNameInput, sNameInput, addressL1, addressL2, addressL3, city, county, phone, dob);
 		patientList.add(patient);
 		instance.updatePatientList(patientList);
 		return null;
 	}
-	//Update of amend an existing patient
+
+	// Update of amend an existing patient
 	public Object amend(TextField fNameInput, TextField sNameInput, TextField addressL1, TextField addressL2,
 			TextField addressL3, TextField city, TextField county, TextField phone, DatePicker dob, int i) {
 		patient = (Patient) patientList.get(i);
-		data(fNameInput, sNameInput, addressL1, addressL2,addressL3, city, county, phone,dob);
+		data(fNameInput, sNameInput, addressL1, addressL2, addressL3, city, county, phone, dob);
 		instance.updatePatientList(patientList);
 		return null;
-		
+
 	}
-	//enter patient to the patient list, both new and amended
+
+	// enter patient to the patient list, both new and amended
 	public void data(TextField fNameInput, TextField sNameInput, TextField addressL1, TextField addressL2,
 			TextField addressL3, TextField city, TextField county, TextField phone, DatePicker dob) {
 		patient.setFname(fNameInput.getText());
@@ -47,9 +50,8 @@ public class EnterPatient {
 		patient.setCity(city.getText());
 		patient.setCounty(county.getText());
 		patient.setPhone(phone.getText());
-		localDob=dob.getValue();
+		localDob = dob.getValue();
 		patient.setDob(localDob);
-		System.out.println(patient.toString());
 
 	}
 }

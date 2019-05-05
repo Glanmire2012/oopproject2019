@@ -10,7 +10,7 @@ public class Procedure implements Serializable {
 	String procedureName;
 	String procedureDescription;
 	Double price;
-	
+
 	public Procedure(String procedureName, String procedureDescription, Double price) {
 		this.price = price;
 		this.procedureDescription = procedureDescription;

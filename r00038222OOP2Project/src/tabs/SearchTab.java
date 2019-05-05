@@ -17,22 +17,20 @@ import patient.PatientDisplayPane;
 import screensanddisplay.MyGridPane;
 import search.Search;
 
-
 public class SearchTab extends MyGridPane {
-	//User entered data
+	// User entered data
 	TextField ID;
 	TextField fNameInput;
 	TextField sNameInput;
 	TextField Phone;
 	DatePicker DateOfBirth;
-	//Imported data from "Instance"	
+	// Imported data from "Instance"
 	Controller instance;
 	Patient patient;
-	
+
 	int PID;
 	MyGridPane resultsPane;
 	ScrollPane scrollpane = new ScrollPane();
-	
 
 	public SearchTab() {
 		searching();
@@ -72,60 +70,57 @@ public class SearchTab extends MyGridPane {
 
 		GridPane.setConstraints(scrollpane, 0, 4, 12, 15);
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		
+
 		resultsPane = new MyGridPane();
-		
+
 		Button enter = new Button("Search");
-		enter.setOnAction(e -> startSearch(fNameInput,sNameInput,DateOfBirth,ID,Phone));
+		enter.setOnAction(e -> startSearch(fNameInput, sNameInput, DateOfBirth, ID, Phone));
 		GridPane.setConstraints(enter, 3, 25);
 
-		
-		
 		this.getChildren().clear();
-		
-		this.getChildren().addAll(fNameLabel, fNameInput, sNameLabel, sNameInput, head, dobLabel, DateOfBirth, phoneLabel,
-				Phone, scrollpane, IDLabel, ID, enter);
-		
+
+		this.getChildren().addAll(fNameLabel, fNameInput, sNameLabel, sNameInput, head, dobLabel, DateOfBirth,
+				phoneLabel, Phone, scrollpane, IDLabel, ID, enter);
+
 		scrollpane.prefWidthProperty().bind(this.widthProperty());
 	}
+
 	@SuppressWarnings("static-access")
-	public void startSearch(TextField fNameInput2, TextField sNameInput2, DatePicker dob, TextField ID, TextField Phone) {
-		//Convert input to the correct data type before passing it to the search class.
+	public void startSearch(TextField fNameInput2, TextField sNameInput2, DatePicker dob, TextField ID,
+			TextField Phone) {
+		// Convert input to the correct data type before passing it to the search class.
 		try {
 			this.PID = Integer.parseInt(ID.getText());
-		}
-		catch(NumberFormatException n){		
+		} catch (NumberFormatException n) {
 			this.PID = 0;
+			// n.printStackTrace();
+		} finally {
 		}
-		finally {				}
 		// Creates a new instance of search and is returned a list of results.
 		Search search = new Search();
-		PatientList results = search.startSearch(fNameInput2.getText(), sNameInput2.getText(), dob.getValue(), PID, Phone.getText());
+		PatientList results = search.startSearch(fNameInput2.getText(), sNameInput2.getText(), dob.getValue(), PID,
+				Phone.getText());
 		int rsize = results.getSize();
-		System.out.println("Result size ="+rsize);
-		
-		//Create an Objectlist of result frames
+
+		// Create an Objectlist of result frames
 		ObjectList resultFrames = new ObjectList();
-		for(int i = 0; i < rsize; i++) {
+		for (int i = 0; i < rsize; i++) {
 			patient = (Patient) results.get(i);
-			PatientDisplayPane searchPane = new PatientDisplayPane(patient,i);
+			PatientDisplayPane searchPane = new PatientDisplayPane(patient, i);
 			resultFrames.add(searchPane);
 		}
-		//Add the result frames to the result pane which is a gridpane.
+		// Add the result frames to the result pane which is a gridpane.
 		int size = resultFrames.getSize();
-		System.out.println("reslults frame size "+size);
 		for (int i = 0; i < size; i++) {
-			//Node rob = (Node) resultFrames.get(i);
-			resultsPane.setConstraints((Node)resultFrames.get(i),0,i);
-			resultsPane.getChildren().add((Node)resultFrames.get(i));
+
+			resultsPane.setConstraints((Node) resultFrames.get(i), 0, i);
+			resultsPane.getChildren().add((Node) resultFrames.get(i));
 		}
 		resultsPane.prefWidthProperty().bind(this.widthProperty());
 		scrollpane.setContent(resultsPane);
-		
-		//restarts the 
+
 		searching();
-		
-	
+
 	}
-	
+
 }

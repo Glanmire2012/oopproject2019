@@ -46,11 +46,11 @@ public class DisplayProcedures extends ScrollPane implements Serializable {
 			}
 
 		} catch (NullPointerException e) {
-			System.out.println("Null at procedure");
+
 			setupProcedures();
 		}
 		if (size <= 0) {
-			System.out.println("zero at procedure");
+
 			setupProcedures();
 		}
 		this.setContent(proGrid);
@@ -73,16 +73,16 @@ public class DisplayProcedures extends ScrollPane implements Serializable {
 	public void setupProcedures() {
 		try {
 			int listSize = procedures.size();
-			System.out.println("Procedures list size ="+listSize);
+
 			for (int i = 0; i < listSize; i++) {
 				Procedure item = new Procedure(procedures.get(i), description.get(i), prices.get(i));
-				System.out.println("got here");
+
 				this.procedureList.addProcedure(item);
 			}
 			this.instance.update(procedureList);
-		
+
 		} catch (NullPointerException n) {
-			System.out.println("Im here");
+			// n.printStackTrace();
 		}
 	}
 

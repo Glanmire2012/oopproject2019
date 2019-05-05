@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import screensanddisplay.LoginGrid;
 import stagesandScenes.LoginScene;
 
-
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
