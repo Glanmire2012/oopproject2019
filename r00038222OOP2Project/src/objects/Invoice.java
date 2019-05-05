@@ -42,6 +42,7 @@ public class Invoice extends GridPane{
 		layOut();
 
 	}
+	@SuppressWarnings("static-access")
 	public void layOut() {
 		Text nameLabel = new Text("Name: "+patient.getFname()+" "+patient.getSname());this.setConstraints(nameLabel, 0,0);
 		Text PIDLabel = new Text("PID : "+patient.getPatientID()+"");this.setConstraints(PIDLabel, 0,2);

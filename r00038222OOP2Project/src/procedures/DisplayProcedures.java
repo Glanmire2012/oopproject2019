@@ -28,6 +28,7 @@ public class DisplayProcedures extends ScrollPane implements Serializable {
 	ArrayList<String> description;
 	int size;
 
+	@SuppressWarnings("static-access")
 	public DisplayProcedures() {
 		this.instance = Controller.getInstance();
 		this.procedureList = instance.getProcedureList();

@@ -8,6 +8,11 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class FileStorage implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Object readObject(String fileName) {
 		Object ob = null;
 		try {

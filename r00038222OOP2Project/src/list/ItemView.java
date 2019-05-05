@@ -74,7 +74,6 @@ public class ItemView extends MyGridPane implements Serializable {
 		for (int i = 0; i < listSize; i++) {
 			patient = (Patient) patientList.get(i);
 			if (patient.getPatientID() == patID) {
-				this.patient = patient;
 				break;
 			}
 		}

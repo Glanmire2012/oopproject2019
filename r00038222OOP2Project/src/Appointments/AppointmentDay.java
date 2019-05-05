@@ -1,7 +1,5 @@
 package Appointments;
 
-import java.time.LocalDate;
-
 import list.ObjectList;
 
 public class AppointmentDay extends ObjectList {

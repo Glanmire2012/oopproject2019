@@ -1,7 +1,6 @@
 package Login;
 
 import java.time.LocalDate;
-import java.util.logging.FileHandler;
 
 import Appointments.AppointmentDay;
 import Appointments.AppointmentGrid;
@@ -9,12 +8,12 @@ import Appointments.AppointmentSlot;
 import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import list.OverallAppointmentList;
 import list.ProcedureList;
 import procedures.DisplayProcedures;
-import javafx.scene.control.Alert.AlertType;
 import screensanddisplay.MainTab;
 import stagesandScenes.HomeScene;
 

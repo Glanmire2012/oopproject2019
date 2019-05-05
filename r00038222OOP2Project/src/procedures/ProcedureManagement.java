@@ -19,6 +19,7 @@ public class ProcedureManagement extends GridPane implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("static-access")
 	public ProcedureManagement() {
 
 		ScrollPane scroll = new ScrollPane();
